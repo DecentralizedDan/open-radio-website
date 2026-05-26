@@ -118,7 +118,7 @@ a {
   color: var(--color-accent);
 }
 
-main a:not(.btn):not(.card):not(.hub-jumps a):not(.section-nav a):not(.unit-list a),
+main a:not(.btn):not(.card):not(.hub-jumps a):not(.section-nav a):not(.unit-list a):not(.card-title-link),
 .site-footer a:not(.btn) {
   text-decoration: underline;
   text-underline-offset: 0.15em;
@@ -128,7 +128,7 @@ a:hover {
   color: var(--color-accent-hover);
 }
 
-main a:not(.btn):not(.card):not(.hub-jumps a):not(.section-nav a):not(.unit-list a):focus-visible,
+main a:not(.btn):not(.card):not(.hub-jumps a):not(.section-nav a):not(.unit-list a):not(.card-title-link):focus-visible,
 .site-footer a:not(.btn):focus-visible {
   background-color: var(--color-focus);
   color: var(--color-focus-text);
@@ -635,16 +635,19 @@ main {
   border-color: var(--color-border);
 }
 
-.card-static h3 a {
+.card-static h3 a,
+.card-title-link {
   color: inherit;
   text-decoration: none;
 }
 
-.card-static h3 a:hover {
+.card-static h3 a:hover,
+.card-title-link:hover {
   color: var(--color-accent);
 }
 
-.card-static h3 a:focus-visible {
+.card-static h3 a:focus-visible,
+.card-title-link:focus-visible {
   background-color: var(--color-focus);
   color: var(--color-focus-text);
   box-shadow: 0 4px 0 0 var(--color-focus-text);

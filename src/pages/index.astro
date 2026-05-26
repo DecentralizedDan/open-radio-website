@@ -118,7 +118,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
             sheet.ready ? (
               <div class="card card-static">
                 <h3>
-                  <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
+                  <a class="card-title-link" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
                 </h3>
                 <p>{sheet.description}</p>
                 <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview draft</span>
