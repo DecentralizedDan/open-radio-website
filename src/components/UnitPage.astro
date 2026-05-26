@@ -8,6 +8,7 @@ import {
   trackLabel,
   type Unit,
 } from '../data/curriculum';
+import { url } from '../lib/paths';
 
 interface Props {
   unit: Unit;
@@ -15,7 +16,7 @@ interface Props {
 
 const { unit } = Astro.props;
 const { prev, next } = getAdjacentUnits(unit);
-const trackHref = `/curriculum/${unit.track}/`;
+const trackHref = url(`/curriculum/${unit.track}/`);
 ---
 
 <PageLayout title={unit.title} description={unit.description} current="curriculum">
@@ -91,7 +92,7 @@ const trackHref = `/curriculum/${unit.track}/`;
               const sheet = getCheatSheet(slug);
               return sheet ? (
                 <li>
-                  <a href={`/reference/cheat-sheets/${sheet.slug}/`}>{sheet.title}</a>
+                  <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
                 </li>
               ) : null;
             })}
@@ -104,7 +105,7 @@ const trackHref = `/curriculum/${unit.track}/`;
       next && (
         <p>
           <strong>What comes next:</strong>{' '}
-          <a href={`/curriculum/${next.track}/${next.slug}/`}>{next.title}</a>
+          <a href={url(`/curriculum/${next.track}/${next.slug}/`)}>{next.title}</a>
         </p>
       )
     }
@@ -191,7 +192,7 @@ Free workshop: how people used radio when everything else failed. No license nee
     {
       unit.cheatSheets && unit.cheatSheets.length > 0 && (
         <p>
-          <a href="/reference/cheat-sheets/">All cheat sheets →</a>
+          <a href={url('/reference/cheat-sheets/')}>All cheat sheets →</a>
         </p>
       )
     }
@@ -201,12 +202,12 @@ Free workshop: how people used radio when everything else failed. No license nee
     (prev || next) && (
       <nav class="unit-nav-footer" aria-label="Track navigation">
         {prev ? (
-          <a href={`/curriculum/${prev.track}/${prev.slug}/`}>← {prev.title}</a>
+          <a href={url(`/curriculum/${prev.track}/${prev.slug}/`)}>← {prev.title}</a>
         ) : (
           <span />
         )}
         {next ? (
-          <a href={`/curriculum/${next.track}/${next.slug}/`}>{next.title} →</a>
+          <a href={url(`/curriculum/${next.track}/${next.slug}/`)}>{next.title} →</a>
         ) : (
           <span />
         )}

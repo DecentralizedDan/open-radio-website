@@ -1,6 +1,7 @@
 ---
 import ExternalLink from '../../components/ExternalLink.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
+import { url } from '../../lib/paths';
 ---
 
 <PageLayout
@@ -58,6 +59,6 @@ import PageLayout from '../../layouts/PageLayout.astro';
   <p>Copyright &copy; 2026 Dan Tennery-Spalding.</p>
 
   <p>
-    <a href="/about/">About this project →</a>
+    <a href={url('/about/')}>About this project →</a>
   </p>
 </PageLayout>

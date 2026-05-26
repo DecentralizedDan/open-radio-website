@@ -2,6 +2,7 @@
 import PageLayout from '../../../layouts/PageLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import { cheatSheets } from '../../../data/curriculum';
+import { url } from '../../../lib/paths';
 
 export function getStaticPaths() {
   return cheatSheets.map((sheet) => ({
@@ -31,5 +32,5 @@ const { sheet } = Astro.props;
     <span class="badge badge-coming">PDF coming soon</span>
   </p>
   <p>This reference card will be available to view online and download as a PDF when published.</p>
-  <p><a href="/reference/cheat-sheets/">← All cheat sheets</a></p>
+  <p><a href={url('/reference/cheat-sheets/')}>← All cheat sheets</a></p>
 </PageLayout>

@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/curriculum';
+import { url } from '../lib/paths';
 ---
 
 <footer class="site-footer">
@@ -10,13 +11,13 @@ import { site } from '../data/curriculum';
         An independent open curriculum project.
       </p>
       <p>
-        <a href="/license/">CC BY-SA 4.0</a> unless noted otherwise.
+        <a href={url('/license/')}>CC BY-SA 4.0</a> unless noted otherwise.
       </p>
     </div>
     <div class="footer-links">
-      <a href="/about/">About</a>
-      <a href="/about/#contact">Contact</a>
-      <a href="/links/">Links</a>
+      <a href={url('/about/')}>About</a>
+      <a href={url('/about/#contact')}>Contact</a>
+      <a href={url('/links/')}>Links</a>
     </div>
   </div>
 </footer>

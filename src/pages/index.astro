@@ -9,6 +9,7 @@ import {
   phoneTrack,
   digitalTrack,
 } from '../data/curriculum';
+import { url } from '../lib/paths';
 
 const featuredWorkshops = [...phoneTrack, ...digitalTrack].filter((u) => u.featured);
 const featuredActivitySlugs = [
@@ -27,9 +28,9 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
       <h1>{site.tagline}</h1>
       <p class="lead">{site.description}</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/start/for-trainers/">I want to teach</a>
-        <a class="btn btn-secondary" href="/start/for-learners/">For learners</a>
-        <a class="btn btn-secondary" href="/curriculum/">Browse curriculum</a>
+        <a class="btn btn-primary" href={url('/start/for-trainers/')}>I want to teach</a>
+        <a class="btn btn-secondary" href={url('/start/for-learners/')}>For learners</a>
+        <a class="btn btn-secondary" href={url('/curriculum/')}>Browse curriculum</a>
       </div>
       <div class="number-strip" aria-label="Curriculum at a glance">
         <span><strong>10</strong> workshops</span>
@@ -47,7 +48,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
         Any experienced Ham can lead these workshops. Each unit includes slides, a learner handout, a
         trainer guide, and promo copy. Groups of 5–95; most sessions run 60–90 minutes.
       </p>
-      <p><a href="/start/for-trainers/">Full guide for trainers →</a></p>
+      <p><a href={url('/start/for-trainers/')}>Full guide for trainers →</a></p>
     </div>
   </section>
 
@@ -55,13 +56,13 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
     <div class="container">
       <h2>Learning paths</h2>
       <div class="card-grid card-grid-2" style="margin-top: 1.25rem;">
-        <a class="card" href="/curriculum/phone/">
+        <a class="card" href={url('/curriculum/phone/')}>
           <h3>Phone track</h3>
           <p>
             Emergency Radio 101 through Ham HF Practical Skills — voice operating from intro to HF.
           </p>
         </a>
-        <a class="card" href="/curriculum/digital/">
+        <a class="card" href={url('/curriculum/digital/')}>
           <h3>Digital track</h3>
           <p>Mesh and digital modes through long-distance digital QSOs on HF.</p>
         </a>
@@ -89,7 +90,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
         {featuredWorkshops.map((unit) => <UnitCard unit={unit} />)}
       </div>
       <p style="margin-top: 1.25rem;">
-        <a href="/curriculum/">View all workshops →</a>
+        <a href={url('/curriculum/')}>View all workshops →</a>
       </p>
     </div>
   </section>
@@ -101,7 +102,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
         {featuredActivities.map((unit) => <UnitCard unit={unit} />)}
       </div>
       <p style="margin-top: 1.25rem;">
-        <a href="/curriculum/activities/">View all activities →</a>
+        <a href={url('/curriculum/activities/')}>View all activities →</a>
       </p>
     </div>
   </section>
@@ -113,7 +114,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
       <div class="cheat-grid" style="margin-top: 1.25rem;">
         {
           cheatSheets.map((sheet) => (
-            <a class="card" href={`/reference/cheat-sheets/${sheet.slug}/`}>
+            <a class="card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
               <h3>{sheet.title}</h3>
               <p>{sheet.description}</p>
             </a>
@@ -121,7 +122,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
         }
       </div>
       <p style="margin-top: 1.25rem;">
-        <a href="/reference/cheat-sheets/">View all cheat sheets →</a>
+        <a href={url('/reference/cheat-sheets/')}>View all cheat sheets →</a>
       </p>
     </div>
   </section>

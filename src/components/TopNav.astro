@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/curriculum';
+import { url } from '../lib/paths';
 
 interface Props {
   current?: 'home' | 'start' | 'curriculum' | 'reference' | 'about' | 'downloads';
@@ -22,12 +23,12 @@ function isActive(key: Props['current']): boolean {
 
 <header class="site-header">
   <div class="container">
-    <a class="logo" href="/">{site.name}</a>
+    <a class="logo" href={url('/')}>{site.name}</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="/" aria-current={isActive('home') ? 'page' : undefined}>Home</a>
-      <a href="/start/for-trainers/" class="nav-start" aria-current={isActive('start') ? 'page' : undefined}>Start</a>
-      <a href="/curriculum/" aria-current={isActive('curriculum') ? 'page' : undefined}>Curriculum</a>
-      <a href="/reference/cheat-sheets/" aria-current={isActive('reference') ? 'page' : undefined}>Reference</a>
+      <a href={url('/')} aria-current={isActive('home') ? 'page' : undefined}>Home</a>
+      <a href={url('/start/for-trainers/')} class="nav-start" aria-current={isActive('start') ? 'page' : undefined}>Start</a>
+      <a href={url('/curriculum/')} aria-current={isActive('curriculum') ? 'page' : undefined}>Curriculum</a>
+      <a href={url('/reference/cheat-sheets/')} aria-current={isActive('reference') ? 'page' : undefined}>Reference</a>
     </nav>
   </div>
 </header>

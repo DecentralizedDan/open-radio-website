@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { url } from '../../lib/paths';
 ---
 
 <PageLayout
@@ -22,11 +23,11 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
   <h2>How this site is organized</h2>
   <ul>
-    <li><a href="/curriculum/">Curriculum</a> — all workshops and activities</li>
-    <li><a href="/curriculum/phone/">Phone track</a> and <a href="/curriculum/digital/">Digital track</a> — ordered paths to HF</li>
-    <li><a href="/curriculum/activities/">Activities</a> — standalone events, any order</li>
-    <li><a href="/reference/cheat-sheets/">Cheat sheets</a> — laminate-friendly references</li>
-    <li><a href="/downloads/">Downloads</a> — all PDFs in one place (coming soon)</li>
+    <li><a href={url('/curriculum/')}>Curriculum</a> — all workshops and activities</li>
+    <li><a href={url('/curriculum/phone/')}>Phone track</a> and <a href={url('/curriculum/digital/')}>Digital track</a> — ordered paths to HF</li>
+    <li><a href={url('/curriculum/activities/')}>Activities</a> — standalone events, any order</li>
+    <li><a href={url('/reference/cheat-sheets/')}>Cheat sheets</a> — laminate-friendly references</li>
+    <li><a href={url('/downloads/')}>Downloads</a> — all PDFs in one place (coming soon)</li>
   </ul>
 
   <h2>Before you teach</h2>
@@ -76,8 +77,8 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
   <p>Materials are CC BY-SA. Adapt for your community; credit the source.</p>
 
   <p style="margin-top: 2rem;">
-    <a class="btn btn-primary" href="/curriculum/">Browse curriculum</a>
+    <a class="btn btn-primary" href={url('/curriculum/')}>Browse curriculum</a>
     {' '}
-    <a class="btn btn-secondary" href="/downloads/">Downloads</a>
+    <a class="btn btn-secondary" href={url('/downloads/')}>Downloads</a>
   </p>
 </PageLayout>

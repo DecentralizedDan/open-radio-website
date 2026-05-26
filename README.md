@@ -20,7 +20,17 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:4321](http://localhost:4321).
+Open [http://localhost:4321/open-radio-website/](http://localhost:4321/open-radio-website/) (local preview uses the same base path as GitHub Pages).
+
+## Deploy (GitHub Pages)
+
+Live URL: [https://decentralizeddan.github.io/open-radio-website/](https://decentralizeddan.github.io/open-radio-website/)
+
+1. Push to the `master` branch on [DecentralizedDan/open-radio-website](https://github.com/DecentralizedDan/open-radio-website).
+2. In the repo: **Settings → Pages → Build and deployment → Source** → choose **GitHub Actions**.
+3. The workflow in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) runs `npm ci`, `npm run build`, and publishes `dist/`.
+
+`astro.config.mjs` sets `site` and `base` for this project-site URL. After the first successful deploy, Pages may take a minute or two to go live.
 
 ## Build
 

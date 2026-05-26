@@ -9,6 +9,7 @@ import {
   phoneTrack,
   unitPath,
 } from '../../data/curriculum';
+import { url } from '../../lib/paths';
 
 const sortedAll = [...allUnits].sort((a, b) => a.title.localeCompare(b.title));
 ---
@@ -30,19 +31,19 @@ const sortedAll = [...allUnits].sort((a, b) => a.title.localeCompare(b.title));
 
   <section id="phone" class="unit-section">
     <h2>Phone track</h2>
-    <p>Voice operating from emergency intro through HF. <a href="/curriculum/phone/">View track page →</a></p>
+    <p>Voice operating from emergency intro through HF. <a href={url('/curriculum/phone/')}>View track page →</a></p>
     <UnitList units={phoneTrack} />
   </section>
 
   <section id="digital" class="unit-section">
     <h2>Digital track</h2>
-    <p>Mesh and digital modes through HF digital QSOs. <a href="/curriculum/digital/">View track page →</a></p>
+    <p>Mesh and digital modes through HF digital QSOs. <a href={url('/curriculum/digital/')}>View track page →</a></p>
     <UnitList units={digitalTrack} />
   </section>
 
   <section id="activities" class="unit-section">
     <h2>Activities</h2>
-    <p>Standalone events — no required order. <a href="/curriculum/activities/">View activities →</a></p>
+    <p>Standalone events — no required order. <a href={url('/curriculum/activities/')}>View activities →</a></p>
     <UnitList units={activities} />
   </section>
 

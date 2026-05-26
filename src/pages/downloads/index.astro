@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { allUnits, cheatSheets } from '../../data/curriculum';
+import { url } from '../../lib/paths';
 ---
 
 <PageLayout
@@ -16,7 +17,7 @@ import { allUnits, cheatSheets } from '../../data/curriculum';
     {
       allUnits.map((unit) => (
         <li>
-          <a href={`/curriculum/${unit.track}/${unit.slug}/`}>
+          <a href={url(`/curriculum/${unit.track}/${unit.slug}/`)}>
             <div>
               <h3>{unit.title}</h3>
               <p>{unit.description}</p>
@@ -33,7 +34,7 @@ import { allUnits, cheatSheets } from '../../data/curriculum';
     {
       cheatSheets.map((sheet) => (
         <li>
-          <a href={`/reference/cheat-sheets/${sheet.slug}/`}>
+          <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
             <div>
               <h3>{sheet.title}</h3>
               <p>{sheet.description}</p>

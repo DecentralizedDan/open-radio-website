@@ -259,8 +259,10 @@ export function trackLabel(track: Track): string {
   }
 }
 
+import { url } from '../lib/paths';
+
 export function unitPath(unit: Unit): string {
-  return `/curriculum/${unit.track}/${unit.slug}/`;
+  return url(`/curriculum/${unit.track}/${unit.slug}/`);
 }
 
 export function getUnit(track: Track, slug: string): Unit | undefined {

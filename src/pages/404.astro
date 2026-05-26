@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { url } from '../lib/paths';
 ---
 
 <PageLayout title="Page not found" description="The page you requested could not be found.">
@@ -8,8 +9,8 @@ import PageLayout from '../layouts/PageLayout.astro';
     That URL isn&apos;t on the air. The page may have moved, or the link may be mistyped.
   </p>
   <div class="hero-actions" style="margin-top: 1.5rem;">
-    <a class="btn btn-primary" href="/">Home</a>
-    <a class="btn btn-secondary" href="/curriculum/">Browse curriculum</a>
-    <a class="btn btn-secondary" href="/start/for-trainers/">For trainers</a>
+    <a class="btn btn-primary" href={url('/')}>Home</a>
+    <a class="btn btn-secondary" href={url('/curriculum/')}>Browse curriculum</a>
+    <a class="btn btn-secondary" href={url('/start/for-trainers/')}>For trainers</a>
   </div>
 </PageLayout>
