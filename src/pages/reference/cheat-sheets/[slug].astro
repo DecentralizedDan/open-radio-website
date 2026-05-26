@@ -29,8 +29,20 @@ const { sheet } = Astro.props;
   <h1>{sheet.title}</h1>
   <p>{sheet.description}</p>
   <p>
-    <span class="badge badge-coming">PDF coming soon</span>
+    {
+      sheet.ready ? (
+        <span class="badge badge-ready">Preview</span>
+      ) : (
+        <span class="badge badge-coming">PDF coming soon</span>
+      )
+    }
   </p>
-  <p>This reference card will be available to view online and download as a PDF when published.</p>
+  {
+    sheet.ready ? (
+      <p>This reference card is in preview. PDF and ODT downloads will be linked here when published.</p>
+    ) : (
+      <p>This reference card will be available to view online and download as a PDF when published.</p>
+    )
+  }
   <p><a href={url('/reference/cheat-sheets/')}>← All cheat sheets</a></p>
 </PageLayout>
