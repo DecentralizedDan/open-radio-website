@@ -75,7 +75,7 @@ export const phoneTrack: Unit[] = [
     description:
       'Programming HTs with CHIRP and VFO, getting on the air, and hitting repeaters.',
     duration: '60–90 min',
-    cheatSheets: ['uhf-vhf-ham'],
+    cheatSheets: ['uhf-vhf-ham', 'radio-etiquette'],
   },
   {
     slug: 'ham-201',
@@ -157,7 +157,7 @@ export const activities: Unit[] = [
     description: 'Using best practices to communicate on the air with FRS radios.',
     duration: '60–90 min',
     featuredActivity: true,
-    cheatSheets: ['uhf-vhf-ham'],
+    cheatSheets: ['uhf-vhf-ham', 'radio-etiquette'],
   },
   {
     slug: 'mesh-network-practical-skills',
@@ -190,7 +190,6 @@ export const activities: Unit[] = [
     description:
       'Developing a Primary, Alternate, Contingency, and Emergency communications plan.',
     duration: '60–90 min',
-    cheatSheets: ['radio-etiquette'],
   },
   {
     slug: 'fox-hunt',
