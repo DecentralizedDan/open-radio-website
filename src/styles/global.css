@@ -283,7 +283,7 @@ p {
   }
 
   .site-nav .nav-start {
-    display: inline;
+    display: inline-flex;
   }
 }
 
