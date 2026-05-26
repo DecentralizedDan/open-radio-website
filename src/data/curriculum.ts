@@ -111,7 +111,6 @@ export const digitalTrack: Unit[] = [
     description:
       'Meshtastic and Meshcore overview with a focus on emcomms and Ham digital modes.',
     duration: '60–90 min',
-    cheatSheets: ['amateur-digital-operation'],
   },
   {
     slug: 'digital-radio-101',
@@ -123,7 +122,6 @@ export const digitalTrack: Unit[] = [
       'Introduction to Ham digital modes: FT8, Winlink, APRS, packet BBS, and more.',
     duration: '60–90 min',
     featured: true,
-    cheatSheets: ['amateur-digital-operation'],
   },
   {
     slug: 'digital-radio-practical-skills',
@@ -157,7 +155,7 @@ export const activities: Unit[] = [
     description: 'Using best practices to communicate on the air with FRS radios.',
     duration: '60–90 min',
     featuredActivity: true,
-    cheatSheets: ['uhf-vhf-ham', 'radio-etiquette'],
+    cheatSheets: ['radio-etiquette'],
   },
   {
     slug: 'mesh-network-practical-skills',
