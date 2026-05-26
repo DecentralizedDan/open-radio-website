@@ -635,6 +635,22 @@ main {
   border-color: var(--color-border);
 }
 
+.card-static h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-static h3 a:hover {
+  color: var(--color-accent);
+}
+
+.card-static h3 a:focus-visible {
+  background-color: var(--color-focus);
+  color: var(--color-focus-text);
+  box-shadow: 0 4px 0 0 var(--color-focus-text);
+  outline: none;
+}
+
 .section {
   margin-block: 2.5rem;
   padding-block: 0;
