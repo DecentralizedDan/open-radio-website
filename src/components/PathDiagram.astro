@@ -1,0 +1,30 @@
+---
+import { phoneTrack, digitalTrack, unitPath } from '../data/curriculum';
+---
+
+<div class="path-diagram" aria-label="Learning paths from beginner to HF">
+  <h2>From zero to HF</h2>
+  <div class="path-columns">
+    <div class="path-track">
+      <h3>Phone track</h3>
+      <ol class="path-steps">
+        {phoneTrack.map((unit) => (
+          <li>
+            <a href={unitPath(unit)}>{unit.title}</a>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="path-track">
+      <h3>Digital track</h3>
+      <ol class="path-steps">
+        {digitalTrack.map((unit) => (
+          <li>
+            <a href={unitPath(unit)}>{unit.title}</a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+  <p class="path-goal">Both tracks can be done independently — or together.</p>
+</div>

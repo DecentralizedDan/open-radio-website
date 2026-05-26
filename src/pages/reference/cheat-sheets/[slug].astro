@@ -1,0 +1,35 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { cheatSheets } from '../../../data/curriculum';
+
+export function getStaticPaths() {
+  return cheatSheets.map((sheet) => ({
+    params: { slug: sheet.slug },
+    props: { sheet },
+  }));
+}
+
+interface Props {
+  sheet: (typeof cheatSheets)[number];
+}
+
+const { sheet } = Astro.props;
+---
+
+<PageLayout title={sheet.title} description={sheet.description} current="reference">
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Cheat sheets', href: '/reference/cheat-sheets/' },
+      { label: sheet.title },
+    ]}
+  />
+  <h1>{sheet.title}</h1>
+  <p>{sheet.description}</p>
+  <p>
+    <span class="badge badge-coming">PDF coming soon</span>
+  </p>
+  <p>This reference card will be available to view online and download as a PDF when published.</p>
+  <p><a href="/reference/cheat-sheets/">← All cheat sheets</a></p>
+</PageLayout>

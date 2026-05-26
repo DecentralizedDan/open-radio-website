@@ -1,0 +1,47 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+
+<PageLayout
+  title="For learners"
+  description="What to expect from Free Ham Radio Curriculum workshops in your community."
+  current="start"
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'For learners' },
+    ]}
+  />
+  <h1>For learners</h1>
+  <p>
+    Free Ham Radio Curriculum materials are used in <strong>local classes and club events</strong> — not as a
+    self-paced online course. If you found this site, a trainer in your community may be planning
+    a workshop, or you are curious what is available.
+  </p>
+
+  <h2>What you might learn</h2>
+  <ul>
+    <li><a href="/curriculum/phone/emergency-radio-101/">Emergency Radio 101</a> — why radio matters when everything else fails</li>
+    <li><a href="/curriculum/phone/ham-101/">Ham 101</a> — introduction to amateur radio and licensing</li>
+    <li><a href="/curriculum/activities/fox-hunt/">Fox Hunt</a> — find a hidden transmitter, learn about antennas</li>
+    <li><a href="/curriculum/phone/ham-hf-practical-skills/">Ham HF Practical Skills</a> — get on HF and make a contact</li>
+  </ul>
+
+  <h2>License milestones</h2>
+  <p>
+    Many workshops require no license at all. Others expect a Technician or General ticket — the unit
+    page always states what is required.
+  </p>
+
+  <h2>Find a class</h2>
+  <p>
+    This site publishes materials for trainers. To attend a workshop, check with your local radio
+    club, library, or mutual aid group — or ask an Elmer you know if they plan to lead one.
+  </p>
+
+  <p style="margin-top: 2rem;">
+    <a class="btn btn-primary" href="/curriculum/">Browse curriculum</a>
+  </p>
+</PageLayout>

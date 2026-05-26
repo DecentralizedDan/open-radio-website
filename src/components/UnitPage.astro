@@ -1,0 +1,216 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import {
+  getAdjacentUnits,
+  getCheatSheet,
+  licenseLabel,
+  trackLabel,
+  type Unit,
+} from '../data/curriculum';
+
+interface Props {
+  unit: Unit;
+}
+
+const { unit } = Astro.props;
+const { prev, next } = getAdjacentUnits(unit);
+const trackHref = `/curriculum/${unit.track}/`;
+---
+
+<PageLayout title={unit.title} description={unit.description} current="curriculum">
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Curriculum', href: '/curriculum/' },
+      { label: trackLabel(unit.track), href: trackHref },
+      { label: unit.title },
+    ]}
+  />
+
+  <div class="unit-meta" style="margin-bottom: 1rem;">
+    <span class="badge">{unit.type}</span>
+    <span class="badge">{licenseLabel(unit.license)}</span>
+    <span class="badge">{unit.duration}</span>
+    {unit.ready ? (
+      <span class="badge badge-ready">Preview</span>
+    ) : (
+      <span class="badge badge-coming">Coming soon</span>
+    )}
+  </div>
+
+  <h1>{unit.title}</h1>
+  <p>{unit.description}</p>
+
+  <nav class="section-nav" aria-label="Page sections">
+    <a href="#overview">Overview</a>
+    <a href="#materials">Materials</a>
+    <a href="#promo">Promo copy</a>
+    <a href="#run">Run this workshop</a>
+  </nav>
+
+  <section id="overview" class="unit-section">
+    <h2>Overview</h2>
+    {
+      unit.ready && unit.slug === 'emergency-radio-101' ? (
+        <>
+          <p>
+            <strong>After this workshop, learners will:</strong>
+          </p>
+          <ul>
+            <li>Understand why radio matters when phones and internet fail</li>
+            <li>Recognize real examples of civilians using radio in disasters</li>
+            <li>Know the next steps on the phone track (GMRS 101, Ham 101, …)</li>
+          </ul>
+          <p>
+            <strong>Duration:</strong> {unit.duration} · <strong>Group size:</strong> 5-95 ·{' '}
+            <strong>Setting:</strong> Indoor
+          </p>
+          <p>
+            <strong>License:</strong> {licenseLabel(unit.license)} · <strong>Equipment:</strong>{' '}
+            Projector, sample radios optional for show-and-tell
+          </p>
+        </>
+      ) : (
+        <>
+          <p>Full trainer overview and learner outcomes will appear here when this unit is published.</p>
+          <p>
+            <strong>Duration:</strong> {unit.duration} · <strong>License:</strong>{' '}
+            {licenseLabel(unit.license)}
+          </p>
+        </>
+      )
+    }
+
+    {
+      unit.cheatSheets && unit.cheatSheets.length > 0 && (
+        <>
+          <h3>Related cheat sheets</h3>
+          <ul>
+            {unit.cheatSheets.map((slug) => {
+              const sheet = getCheatSheet(slug);
+              return sheet ? (
+                <li>
+                  <a href={`/reference/cheat-sheets/${sheet.slug}/`}>{sheet.title}</a>
+                </li>
+              ) : null;
+            })}
+          </ul>
+        </>
+      )
+    }
+
+    {
+      next && (
+        <p>
+          <strong>What comes next:</strong>{' '}
+          <a href={`/curriculum/${next.track}/${next.slug}/`}>{next.title}</a>
+        </p>
+      )
+    }
+  </section>
+
+  <section id="materials" class="unit-section">
+    <h2>Materials</h2>
+    {
+      unit.ready ? (
+        <div class="materials-grid">
+          <div class="material-card">
+            <h3>Slides</h3>
+            <p>60–90 minute slide deck with speaker notes.</p>
+            <span class="badge badge-coming">PDF coming soon</span>
+          </div>
+          <div class="material-card">
+            <h3>Learner handout</h3>
+            <p>Take-home reference — complements the slides.</p>
+            <span class="badge badge-coming">PDF coming soon</span>
+          </div>
+          <div class="material-card">
+            <h3>Trainer guide</h3>
+            <p>For instructors — logistics, equipment, success criteria.</p>
+            <span class="badge badge-coming">PDF coming soon</span>
+          </div>
+        </div>
+      ) : (
+        <p>Slides, handout, and trainer guide will be available here when this unit is published.</p>
+      )
+    }
+  </section>
+
+  <section id="promo" class="unit-section">
+    <h2>Promo copy</h2>
+    {
+      unit.ready && unit.slug === 'emergency-radio-101' ? (
+        <>
+          <div class="promo-block">
+            <strong>Long (email / newsletter)</strong>
+            <pre>
+When disaster strikes, phones and internet often fail first. Emergency Radio 101 uses real case
+studies to show how civilians have used radio to stay connected — and what you can do next in
+your community. No license or prior experience required. Free; 60–90 minutes.
+            </pre>
+          </div>
+          <div class="promo-block">
+            <strong>Medium</strong>
+            <pre>
+Free workshop: how people used radio when everything else failed. No license needed. 60–90 min.
+            </pre>
+          </div>
+          <div class="promo-block">
+            <strong>Short (SMS)</strong>
+            <pre>Reminder: Emergency Radio 101 tonight — no experience needed. See you there!</pre>
+          </div>
+        </>
+      ) : (
+        <p>Long, medium, and short promo blurbs will appear here when this unit is published.</p>
+      )
+    }
+  </section>
+
+  <section id="run" class="unit-section">
+    <h2>Run this workshop</h2>
+    {
+      unit.ready && unit.slug === 'emergency-radio-101' ? (
+        <>
+          <p><strong>5-minute prep checklist</strong></p>
+          <ul>
+            <li>Skim trainer guide and slide notes</li>
+            <li>Test projector and slides</li>
+            <li>Print handouts (one per learner)</li>
+            <li>Optional: bring an HT or FRS radio for show-and-tell</li>
+          </ul>
+          <p>
+            <strong>Success criteria:</strong> Learners can explain why radio matters in disasters and
+            name one realistic next step in their radio journey.
+          </p>
+        </>
+      ) : (
+        <p>Prep checklist and success criteria will appear here when this unit is published.</p>
+      )
+    }
+    {
+      unit.cheatSheets && unit.cheatSheets.length > 0 && (
+        <p>
+          <a href="/reference/cheat-sheets/">All cheat sheets →</a>
+        </p>
+      )
+    }
+  </section>
+
+  {
+    (prev || next) && (
+      <nav class="unit-nav-footer" aria-label="Track navigation">
+        {prev ? (
+          <a href={`/curriculum/${prev.track}/${prev.slug}/`}>← {prev.title}</a>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <a href={`/curriculum/${next.track}/${next.slug}/`}>{next.title} →</a>
+        ) : (
+          <span />
+        )}
+      </nav>
+    )
+  }
+</PageLayout>

@@ -1,0 +1,26 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import UnitList from '../../../components/UnitList.astro';
+import { phoneTrack } from '../../../data/curriculum';
+---
+
+<PageLayout
+  title="Phone track"
+  description="Workshops from Emergency Radio 101 through Ham HF Practical Skills."
+  current="curriculum"
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Curriculum', href: '/curriculum/' },
+      { label: 'Phone track' },
+    ]}
+  />
+  <h1>Phone track</h1>
+  <p>
+    Voice operating from no experience to HF. Workshops build on each other — but any unit can be
+    offered alone, especially the first three (no license required).
+  </p>
+  <UnitList units={phoneTrack} />
+</PageLayout>

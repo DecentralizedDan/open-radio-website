@@ -1,0 +1,128 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PathDiagram from '../components/PathDiagram.astro';
+import UnitCard from '../components/UnitCard.astro';
+import {
+  site,
+  activities,
+  cheatSheets,
+  phoneTrack,
+  digitalTrack,
+} from '../data/curriculum';
+
+const featuredWorkshops = [...phoneTrack, ...digitalTrack].filter((u) => u.featured);
+const featuredActivitySlugs = [
+  'fox-hunt',
+  'radio-practical-skills',
+  'how-to-host-a-neighborhood-net',
+];
+const featuredActivities = featuredActivitySlugs.map((slug) =>
+  activities.find((u) => u.slug === slug),
+).filter((u): u is NonNullable<typeof u> => u !== undefined);
+---
+
+<PageLayout title={site.name} description={site.description} current="home">
+  <section class="hero">
+    <div class="container">
+      <h1>{site.tagline}</h1>
+      <p class="lead">{site.description}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/start/for-trainers/">I want to teach</a>
+        <a class="btn btn-secondary" href="/start/for-learners/">For learners</a>
+        <a class="btn btn-secondary" href="/curriculum/">Browse curriculum</a>
+      </div>
+      <div class="number-strip" aria-label="Curriculum at a glance">
+        <span><strong>10</strong> workshops</span>
+        <span><strong>5</strong> activities</span>
+        <span><strong>0</strong> licenses required to start</span>
+      </div>
+      <PathDiagram />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>For trainers</h2>
+      <p>
+        Any experienced Ham can lead these workshops. Each unit includes slides, a learner handout, a
+        trainer guide, and promo copy. Groups of 5–95; most sessions run 60–90 minutes.
+      </p>
+      <p><a href="/start/for-trainers/">Full guide for trainers →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Learning paths</h2>
+      <div class="card-grid card-grid-2" style="margin-top: 1.25rem;">
+        <a class="card" href="/curriculum/phone/">
+          <h3>Phone track</h3>
+          <p>
+            Emergency Radio 101 through Ham HF Practical Skills — voice operating from intro to HF.
+          </p>
+        </a>
+        <a class="card" href="/curriculum/digital/">
+          <h3>Digital track</h3>
+          <p>Mesh and digital modes through long-distance digital QSOs on HF.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="quick-facts">
+        <span>60–90 min per workshop</span>
+        <span>Groups of 5–95</span>
+        <span>CC BY-SA · PDF + slides + handouts</span>
+      </div>
+      <p class="trust-strip" style="margin-top: 1rem;">
+        Complements ARRL license prep — does not replace it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Featured workshops</h2>
+      <div class="card-grid card-grid-3" style="margin-top: 1.25rem;">
+        {featuredWorkshops.map((unit) => <UnitCard unit={unit} />)}
+      </div>
+      <p style="margin-top: 1.25rem;">
+        <a href="/curriculum/">View all workshops →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Featured activities</h2>
+      <div class="card-grid card-grid-3" style="margin-top: 1.25rem;">
+        {featuredActivities.map((unit) => <UnitCard unit={unit} />)}
+      </div>
+      <p style="margin-top: 1.25rem;">
+        <a href="/curriculum/activities/">View all activities →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Cheat sheets</h2>
+      <p>Laminate-friendly reference cards — free to print and share.</p>
+      <div class="cheat-grid" style="margin-top: 1.25rem;">
+        {
+          cheatSheets.map((sheet) => (
+            <a class="card" href={`/reference/cheat-sheets/${sheet.slug}/`}>
+              <h3>{sheet.title}</h3>
+              <p>{sheet.description}</p>
+            </a>
+          ))
+        }
+      </div>
+      <p style="margin-top: 1.25rem;">
+        <a href="/reference/cheat-sheets/">View all cheat sheets →</a>
+      </p>
+    </div>
+  </section>
+</PageLayout>

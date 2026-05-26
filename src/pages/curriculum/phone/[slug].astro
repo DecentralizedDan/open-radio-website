@@ -1,0 +1,19 @@
+---
+import UnitPage from '../../../components/UnitPage.astro';
+import { phoneTrack } from '../../../data/curriculum';
+
+export function getStaticPaths() {
+  return phoneTrack.map((unit) => ({
+    params: { slug: unit.slug },
+    props: { unit },
+  }));
+}
+
+interface Props {
+  unit: (typeof phoneTrack)[number];
+}
+
+const { unit } = Astro.props;
+---
+
+<UnitPage unit={unit} />

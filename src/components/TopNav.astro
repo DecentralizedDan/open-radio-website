@@ -1,0 +1,33 @@
+---
+import { site } from '../data/curriculum';
+
+interface Props {
+  current?: 'home' | 'start' | 'curriculum' | 'reference' | 'about' | 'downloads';
+}
+
+const { current } = Astro.props;
+const path = Astro.url.pathname;
+
+function isActive(key: Props['current']): boolean {
+  if (current) return current === key;
+  if (key === 'home') return path === '/';
+  if (key === 'start') return path.startsWith('/start');
+  if (key === 'curriculum') return path.startsWith('/curriculum');
+  if (key === 'reference') return path.startsWith('/reference');
+  if (key === 'about') return path === '/about/';
+  if (key === 'downloads') return path === '/downloads/';
+  return false;
+}
+---
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="/">{site.name}</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" aria-current={isActive('home') ? 'page' : undefined}>Home</a>
+      <a href="/start/for-trainers/" class="nav-start" aria-current={isActive('start') ? 'page' : undefined}>Start</a>
+      <a href="/curriculum/" aria-current={isActive('curriculum') ? 'page' : undefined}>Curriculum</a>
+      <a href="/reference/cheat-sheets/" aria-current={isActive('reference') ? 'page' : undefined}>Reference</a>
+    </nav>
+  </div>
+</header>

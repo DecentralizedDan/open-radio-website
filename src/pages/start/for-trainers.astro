@@ -1,0 +1,83 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+
+<PageLayout
+  title="For trainers"
+  description="How to use Free Ham Radio Curriculum materials to lead workshops in your club or community."
+  current="start"
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'For trainers' },
+    ]}
+  />
+  <h1>For trainers</h1>
+  <p>
+    Free Ham Radio Curriculum is a set of ready-to-lead workshops and activities — not an online course. You
+    download materials, gather a group, and teach in person.
+  </p>
+
+  <h2>How this site is organized</h2>
+  <ul>
+    <li><a href="/curriculum/">Curriculum</a> — all workshops and activities</li>
+    <li><a href="/curriculum/phone/">Phone track</a> and <a href="/curriculum/digital/">Digital track</a> — ordered paths to HF</li>
+    <li><a href="/curriculum/activities/">Activities</a> — standalone events, any order</li>
+    <li><a href="/reference/cheat-sheets/">Cheat sheets</a> — laminate-friendly references</li>
+    <li><a href="/downloads/">Downloads</a> — all PDFs in one place (coming soon)</li>
+  </ul>
+
+  <h2>Before you teach</h2>
+  <ul>
+    <li>Skim the unit’s trainer guide and slide notes (5–15 minutes)</li>
+    <li>Print learner handouts — one per person</li>
+    <li>Check license requirements for your audience</li>
+    <li>Room: projector for workshops; outdoor space for some activities</li>
+    <li>Groups of 5–95; most sessions run 60–90 minutes</li>
+  </ul>
+
+  <h2 id="suggested-sequences">Suggested sequences</h2>
+  <p>
+    You do not have to plan a whole semester. These bundles are starting points — run any single
+    unit alone if you prefer.
+  </p>
+
+  <div class="card-grid card-grid-2" style="margin-top: 1rem;">
+    <div class="card card-static">
+      <h3>Community intro night</h3>
+      <p>Emergency Radio 101 + Fox Hunt · ~2–3 hours · No license</p>
+    </div>
+    <div class="card card-static">
+      <h3>License-free digital</h3>
+      <p>Mesh Networks 101 + Mesh Network Practical Skills · No license</p>
+    </div>
+    <div class="card card-static">
+      <h3>Full phone path</h3>
+      <p>All six phone workshops in order · Novice to HF voice</p>
+    </div>
+    <div class="card card-static">
+      <h3>Full digital path</h3>
+      <p>All four digital workshops in order · To HF digital QSOs</p>
+    </div>
+    <div class="card card-static">
+      <h3>Emcomm weekend</h3>
+      <p>PACE Planning + How to Host a Neighborhood Net + Message Passing cheat sheet</p>
+    </div>
+  </div>
+
+  <h2>FAQ</h2>
+  <h3>Do I need to be an ARRL instructor?</h3>
+  <p>No. Any experienced Ham who can follow the trainer guide can lead these sessions.</p>
+  <h3>Can I run just one workshop?</h3>
+  <p>Yes. Especially the first three phone workshops and first two digital workshops — no license required.</p>
+  <h3>Can I change the slides?</h3>
+  <p>Materials are CC BY-SA. Adapt for your community; credit the source.</p>
+
+  <p style="margin-top: 2rem;">
+    <a class="btn btn-primary" href="/curriculum/">Browse curriculum</a>
+    {' '}
+    <a class="btn btn-secondary" href="/downloads/">Downloads</a>
+  </p>
+</PageLayout>

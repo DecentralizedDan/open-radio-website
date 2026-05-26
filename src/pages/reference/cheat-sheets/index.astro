@@ -1,0 +1,35 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { cheatSheets } from '../../../data/curriculum';
+---
+
+<PageLayout
+  title="Cheat sheets"
+  description="Print-and-laminate reference cards for Free Ham Radio Curriculum workshops."
+  current="reference"
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Cheat sheets' },
+    ]}
+  />
+  <h1>Cheat sheets</h1>
+  <p>
+    Full- or half-page references to get new operators on the air. Laminate-friendly — free to
+    print and share.
+  </p>
+
+  <div class="cheat-grid" style="margin-top: 1.5rem;">
+    {
+      cheatSheets.map((sheet) => (
+        <a class="card" href={`/reference/cheat-sheets/${sheet.slug}/`}>
+          <h3>{sheet.title}</h3>
+          <p>{sheet.description}</p>
+          <span class="badge badge-coming" style="margin-top: 0.75rem;">PDF coming soon</span>
+        </a>
+      ))
+    }
+  </div>
+</PageLayout>

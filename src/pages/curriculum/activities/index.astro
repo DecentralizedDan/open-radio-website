@@ -1,0 +1,26 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import UnitList from '../../../components/UnitList.astro';
+import { activities } from '../../../data/curriculum';
+---
+
+<PageLayout
+  title="Activities"
+  description="Standalone radio activities — fox hunts, nets, PACE planning, and more."
+  current="curriculum"
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Curriculum', href: '/curriculum/' },
+      { label: 'Activities' },
+    ]}
+  />
+  <h1>Activities</h1>
+  <p>
+    Informal learning experiences — no required order. Each includes step-by-step instructions for
+    leaders and participants.
+  </p>
+  <UnitList units={activities} />
+</PageLayout>

@@ -1,0 +1,26 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import UnitList from '../../../components/UnitList.astro';
+import { digitalTrack } from '../../../data/curriculum';
+---
+
+<PageLayout
+  title="Digital track"
+  description="Workshops from Mesh Networks 101 through long-distance digital QSOs."
+  current="curriculum"
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Curriculum', href: '/curriculum/' },
+      { label: 'Digital track' },
+    ]}
+  />
+  <h1>Digital track</h1>
+  <p>
+    Mesh networks and Ham digital modes through HF digital QSOs. The first two workshops require no
+    license.
+  </p>
+  <UnitList units={digitalTrack} />
+</PageLayout>

@@ -1,0 +1,19 @@
+---
+import UnitPage from '../../../components/UnitPage.astro';
+import { activities } from '../../../data/curriculum';
+
+export function getStaticPaths() {
+  return activities.map((unit) => ({
+    params: { slug: unit.slug },
+    props: { unit },
+  }));
+}
+
+interface Props {
+  unit: (typeof activities)[number];
+}
+
+const { unit } = Astro.props;
+---
+
+<UnitPage unit={unit} />

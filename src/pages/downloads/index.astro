@@ -1,0 +1,47 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { allUnits, cheatSheets } from '../../data/curriculum';
+---
+
+<PageLayout
+  title="Downloads"
+  description="Download all Free Ham Radio Curriculum PDFs and handouts in one place."
+  current="downloads"
+>
+  <h1>Downloads</h1>
+  <p>All curriculum PDFs and cheat sheets in one place. Files will appear here as units are published.</p>
+
+  <h2>Workshops and activities</h2>
+  <ul class="unit-list">
+    {
+      allUnits.map((unit) => (
+        <li>
+          <a href={`/curriculum/${unit.track}/${unit.slug}/`}>
+            <div>
+              <h3>{unit.title}</h3>
+              <p>{unit.description}</p>
+            </div>
+            <span class="badge badge-coming">PDFs coming soon</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Cheat sheets</h2>
+  <ul class="unit-list">
+    {
+      cheatSheets.map((sheet) => (
+        <li>
+          <a href={`/reference/cheat-sheets/${sheet.slug}/`}>
+            <div>
+              <h3>{sheet.title}</h3>
+              <p>{sheet.description}</p>
+            </div>
+            <span class="badge badge-coming">PDF coming soon</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>

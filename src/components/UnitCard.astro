@@ -1,0 +1,19 @@
+---
+import { licenseLabel, unitPath, type Unit } from '../data/curriculum';
+
+interface Props {
+  unit: Unit;
+}
+
+const { unit } = Astro.props;
+---
+
+<a class="card" href={unitPath(unit)}>
+  <div class="unit-meta" style="margin-bottom: 0.5rem;">
+    <span class="badge">{unit.type}</span>
+    <span class="badge">{licenseLabel(unit.license)}</span>
+    {unit.ready ? <span class="badge badge-ready">Preview</span> : <span class="badge badge-coming">Coming soon</span>}
+  </div>
+  <h3>{unit.title}</h3>
+  <p>{unit.description}</p>
+</a>

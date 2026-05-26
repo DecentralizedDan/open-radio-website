@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNav from '../components/TopNav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: 'home' | 'start' | 'curriculum' | 'reference' | 'about' | 'downloads';
+}
+
+const { title, description, current } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <TopNav current={current} />
+  <main id="main-content" tabindex="-1">
+    <div class="container">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
