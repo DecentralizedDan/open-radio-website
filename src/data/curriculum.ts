@@ -41,7 +41,7 @@ export const phoneTrack: Unit[] = [
     duration: '60–90 min',
     featured: true,
     ready: true,
-    cheatSheets: ['message-passing'],
+    cheatSheets: ['radio-etiquette'],
   },
   {
     slug: 'gmrs-101',
@@ -176,7 +176,7 @@ export const activities: Unit[] = [
       'Guiding a group through holding their own net, including real-time troubleshooting.',
     duration: '60–90 min',
     featuredActivity: true,
-    cheatSheets: ['message-passing'],
+    cheatSheets: ['radio-etiquette'],
   },
   {
     slug: 'pace-planning',
@@ -187,7 +187,7 @@ export const activities: Unit[] = [
     description:
       'Developing a Primary, Alternate, Contingency, and Emergency communications plan.',
     duration: '60–90 min',
-    cheatSheets: ['message-passing'],
+    cheatSheets: ['radio-etiquette'],
   },
   {
     slug: 'fox-hunt',
@@ -231,8 +231,8 @@ export const cheatSheets: CheatSheet[] = [
     description: 'Digital modes overview for new operators.',
   },
   {
-    slug: 'message-passing',
-    title: 'Message Passing',
+    slug: 'radio-etiquette',
+    title: 'Radio Etiquette',
     description: 'Structured message handling for emcomm.',
   },
 ];
