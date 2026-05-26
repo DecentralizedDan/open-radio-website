@@ -59,9 +59,9 @@ const trackHref = url(`/curriculum/${unit.track}/`);
             <strong>After this workshop, learners will:</strong>
           </p>
           <ul>
-            <li>Understand why radio matters when phones and internet fail</li>
-            <li>Recognize real examples of civilians using radio in disasters</li>
-            <li>Know the next steps on the phone track (GMRS 101, Ham 101, …)</li>
+            <li>Understand how radio was used after disasters in the US</li>
+            <li>Understand fundamentals of what GMRS and Ham radio can and cannot do</li>
+            <li>Understand how GMRS and Ham differ, including Ham's strengths vs. GMRS</li>
           </ul>
           <p>
             <strong>Duration:</strong> {unit.duration} · <strong>Group size:</strong> 5-95 ·{' '}
@@ -69,7 +69,7 @@ const trackHref = url(`/curriculum/${unit.track}/`);
           </p>
           <p>
             <strong>License:</strong> {licenseLabel(unit.license)} · <strong>Equipment:</strong>{' '}
-            Projector, sample radios optional for show-and-tell
+            Projector, sample HT to show learners
           </p>
         </>
       ) : (
@@ -162,18 +162,18 @@ Free workshop: how people used radio when everything else failed. No license nee
             <li>Skim trainer guide and slide notes</li>
             <li>Test projector and slides</li>
             <li>Print handouts (one per learner)</li>
-            <li>Optional: bring an HT or FRS radio for show-and-tell</li>
+            <li>Optional: bring an HT (FRS, GMRS or Ham) for show-and-tell</li>
           </ul>
           <p>
-            <strong>Success criteria:</strong> Learners can explain why radio matters in disasters and
-            name one realistic next step in their radio journey.
+            <strong>Success criteria:</strong> Learners can explain how they could incorporate
+            radio into their emergency planning.
           </p>
         </>
       ) : (
         <p>Prep checklist and success criteria will appear here when this unit is published.</p>
       )
     }
-    <RelatedCheatSheets unit={unit} heading="Recommended cheat sheets" />
+    <RelatedCheatSheets unit={unit} heading="Related cheat sheets" />
     {
       unit.cheatSheets && unit.cheatSheets.length > 0 && (
         <p>Print one per learner before class.</p>
