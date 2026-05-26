@@ -26,11 +26,12 @@ Open [http://localhost:4321/open-radio-website/](http://localhost:4321/open-radi
 
 Live URL: [https://decentralizeddan.github.io/open-radio-website/](https://decentralizeddan.github.io/open-radio-website/)
 
-1. Push to the `master` branch on [DecentralizedDan/open-radio-website](https://github.com/DecentralizedDan/open-radio-website).
-2. In the repo: **Settings → Pages → Build and deployment → Source** → choose **GitHub Actions**.
-3. The workflow in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) runs `npm ci`, `npm run build`, and publishes `dist/`.
+1. **One-time:** In the repo, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions** (not “Deploy from a branch”). Save. Without this step, deploy workflows fail with “Get Pages site failed”.
+2. Push to the `master` branch on [DecentralizedDan/open-radio-website](https://github.com/DecentralizedDan/open-radio-website).
 
 `astro.config.mjs` sets `site` and `base` for this project-site URL. After the first successful deploy, Pages may take a minute or two to go live.
+
+The workflow in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) runs `npm ci`, `npm run build`, and publishes `dist/`.
 
 ## Build
 
