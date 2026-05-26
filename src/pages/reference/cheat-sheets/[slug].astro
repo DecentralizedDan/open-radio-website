@@ -4,6 +4,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import CheatSheetDownloads from '../../../components/CheatSheetDownloads.astro';
 import RelatedUnits from '../../../components/RelatedUnits.astro';
 import { cheatSheets } from '../../../data/curriculum';
+import { cheatSheetHasDownloads } from '../../../lib/downloads';
 import { url } from '../../../lib/paths';
 
 export function getStaticPaths() {
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const { sheet } = Astro.props;
+const hasDownloads = cheatSheetHasDownloads(sheet.slug);
 ---
 
 <PageLayout title={sheet.title} description={sheet.description} current="reference">
@@ -31,16 +33,11 @@ const { sheet } = Astro.props;
   <h1>{sheet.title}</h1>
   <p>{sheet.description}</p>
   <p>
-    {
-      sheet.ready ? (
-        <span class="badge badge-ready">Preview draft</span>
-      ) : (
-        <span class="badge badge-coming">PDF coming soon</span>
-      )
-    }
+    {sheet.ready && <span class="badge badge-ready">Preview draft</span>}
+    {!hasDownloads && <span class="badge badge-coming">Coming soon</span>}
   </p>
   {
-    sheet.ready ? (
+    hasDownloads ? (
       <>
         <p>Laminate-friendly — free to print and share.</p>
         <CheatSheetDownloads slug={sheet.slug} />

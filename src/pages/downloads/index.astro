@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import CheatSheetDownloads from '../../components/CheatSheetDownloads.astro';
 import { allUnits, cheatSheets } from '../../data/curriculum';
+import { cheatSheetHasDownloads } from '../../lib/downloads';
 import { url } from '../../lib/paths';
 ---
 
@@ -42,10 +43,10 @@ import { url } from '../../lib/paths';
             <p>{sheet.description}</p>
           </div>
           {
-            sheet.ready ? (
+            cheatSheetHasDownloads(sheet.slug) ? (
               <CheatSheetDownloads slug={sheet.slug} />
             ) : (
-              <span class="badge badge-coming">PDF coming soon</span>
+              <span class="badge badge-coming">Coming soon</span>
             )
           }
         </div>

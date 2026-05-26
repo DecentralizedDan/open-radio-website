@@ -10,6 +10,7 @@ import {
   phoneTrack,
   digitalTrack,
 } from '../data/curriculum';
+import { cheatSheetHasDownloads } from '../lib/downloads';
 import { url } from '../lib/paths';
 
 const featuredWorkshops = [...phoneTrack, ...digitalTrack].filter((u) => u.featured);
@@ -114,23 +115,29 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
       <p>Laminate-friendly reference cards — free to print and share.</p>
       <div class="cheat-grid" style="margin-top: 1.25rem;">
         {
-          cheatSheets.map((sheet) =>
-            sheet.ready ? (
+          cheatSheets.map((sheet) => {
+            const hasDownloads = cheatSheetHasDownloads(sheet.slug);
+            return hasDownloads || sheet.ready ? (
               <div class="card card-static">
                 <h3>
                   <a class="card-title-link" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
                 </h3>
                 <p>{sheet.description}</p>
-                <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview draft</span>
-                <CheatSheetDownloads slug={sheet.slug} />
+                {sheet.ready && <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview draft</span>}
+                {hasDownloads ? (
+                  <CheatSheetDownloads slug={sheet.slug} />
+                ) : (
+                  <span class="badge badge-coming" style="margin-top: 0.75rem;">Coming soon</span>
+                )}
               </div>
             ) : (
               <a class="card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
                 <h3>{sheet.title}</h3>
                 <p>{sheet.description}</p>
+                <span class="badge badge-coming" style="margin-top: 0.75rem;">Coming soon</span>
               </a>
-            ),
-          )
+            );
+          })
         }
       </div>
       <p style="margin-top: 1.25rem;">
