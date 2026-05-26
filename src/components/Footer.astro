@@ -5,19 +5,13 @@ import { url } from '../lib/paths';
 
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div>
-      <p><strong>{site.name}</strong></p>
-      <p class="disclaimer">
-        An independent open curriculum project.
-      </p>
-      <p>
-        <a href={url('/license/')}>CC BY-SA 4.0</a> unless noted otherwise.
-      </p>
-    </div>
-    <div class="footer-links">
+    <p class="footer-tagline">
+      <strong>{site.name}</strong> — An independent open curriculum project.
+    </p>
+    <nav class="footer-links" aria-label="Footer">
       <a href={url('/about/')}>About</a>
       <a href={url('/about/#contact')}>Contact</a>
       <a href={url('/links/')}>Links</a>
-    </div>
+    </nav>
   </div>
 </footer>
