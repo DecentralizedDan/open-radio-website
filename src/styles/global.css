@@ -563,7 +563,7 @@ main {
 
 .path-goal {
   margin-top: 1rem;
-  text-align: center;
+  text-align: left;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--color-muted);
