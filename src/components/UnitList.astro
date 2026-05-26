@@ -21,7 +21,7 @@ const { units } = Astro.props;
             <span class="badge">{unit.type}</span>
             <span class="badge">{licenseLabel(unit.license)}</span>
             {unit.ready ? (
-              <span class="badge badge-ready">Preview</span>
+              <span class="badge badge-ready">Preview draft</span>
             ) : (
               <span class="badge badge-coming">Coming soon</span>
             )}
