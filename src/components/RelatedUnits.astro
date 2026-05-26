@@ -1,0 +1,48 @@
+---
+import { getUnitsForCheatSheet, unitPath, type CheatSheet } from '../data/curriculum';
+
+interface Props {
+  sheet: Pick<CheatSheet, 'slug' | 'title'>;
+}
+
+const { sheet } = Astro.props;
+const related = getUnitsForCheatSheet(sheet.slug);
+const workshops = related.filter((unit) => unit.type === 'workshop');
+const activities = related.filter((unit) => unit.type === 'activity');
+---
+
+{
+  related.length > 0 && (
+    <section class="unit-section">
+      <h2>Use with these workshops and activities</h2>
+      {
+        workshops.length > 0 && (
+          <>
+            <h3>Workshops</h3>
+            <ul>
+              {workshops.map((unit) => (
+                <li>
+                  <a href={unitPath(unit)}>{unit.title}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+      {
+        activities.length > 0 && (
+          <>
+            <h3>Activities</h3>
+            <ul>
+              {activities.map((unit) => (
+                <li>
+                  <a href={unitPath(unit)}>{unit.title}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </section>
+  )
+}

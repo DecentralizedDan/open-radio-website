@@ -2,6 +2,7 @@
 import PageLayout from '../../../layouts/PageLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import CheatSheetDownloads from '../../../components/CheatSheetDownloads.astro';
+import RelatedUnits from '../../../components/RelatedUnits.astro';
 import { cheatSheets } from '../../../data/curriculum';
 import { url } from '../../../lib/paths';
 
@@ -48,5 +49,6 @@ const { sheet } = Astro.props;
       <p>This reference card will be available to view online and download as a PDF when published.</p>
     )
   }
+  <RelatedUnits sheet={sheet} />
   <p style="margin-top: 1.5rem;"><a href={url('/reference/cheat-sheets/')}>← All cheat sheets</a></p>
 </PageLayout>

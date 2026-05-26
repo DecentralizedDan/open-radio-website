@@ -1,9 +1,9 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Breadcrumbs from './Breadcrumbs.astro';
+import RelatedCheatSheets from './RelatedCheatSheets.astro';
 import {
   getAdjacentUnits,
-  getCheatSheet,
   licenseLabel,
   trackLabel,
   type Unit,
@@ -83,23 +83,7 @@ const trackHref = url(`/curriculum/${unit.track}/`);
       )
     }
 
-    {
-      unit.cheatSheets && unit.cheatSheets.length > 0 && (
-        <>
-          <h3>Related cheat sheets</h3>
-          <ul>
-            {unit.cheatSheets.map((slug) => {
-              const sheet = getCheatSheet(slug);
-              return sheet ? (
-                <li>
-                  <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
-                </li>
-              ) : null;
-            })}
-          </ul>
-        </>
-      )
-    }
+    <RelatedCheatSheets unit={unit} />
 
     {
       next && (
@@ -187,6 +171,12 @@ Free workshop: how people used radio when everything else failed. No license nee
         </>
       ) : (
         <p>Prep checklist and success criteria will appear here when this unit is published.</p>
+      )
+    }
+    <RelatedCheatSheets unit={unit} heading="Recommended cheat sheets" />
+    {
+      unit.cheatSheets && unit.cheatSheets.length > 0 && (
+        <p>Print one per learner before class.</p>
       )
     }
     {

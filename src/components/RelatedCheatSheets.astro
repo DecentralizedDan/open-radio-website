@@ -1,0 +1,30 @@
+---
+import { getCheatSheet, type Unit } from '../data/curriculum';
+import { url } from '../lib/paths';
+
+interface Props {
+  unit: Unit;
+  heading?: string;
+}
+
+const { unit, heading = 'Related cheat sheets' } = Astro.props;
+
+const sheets = (unit.cheatSheets ?? [])
+  .map((slug) => getCheatSheet(slug))
+  .filter((sheet): sheet is NonNullable<typeof sheet> => sheet !== undefined);
+---
+
+{
+  sheets.length > 0 && (
+    <>
+      <h3>{heading}</h3>
+      <ul>
+        {sheets.map((sheet) => (
+          <li>
+            <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}

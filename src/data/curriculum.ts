@@ -1,3 +1,5 @@
+import { url } from '../lib/paths';
+
 export type License = 'none' | 'technician' | 'general';
 export type UnitType = 'workshop' | 'activity';
 export type Track = 'phone' | 'digital' | 'activities';
@@ -261,7 +263,14 @@ export function trackLabel(track: Track): string {
   }
 }
 
-import { url } from '../lib/paths';
+export function getCheatSheet(slug: string): CheatSheet | undefined {
+  return cheatSheets.find((s) => s.slug === slug);
+}
+
+/** Units that list this cheat sheet slug — derived from Unit.cheatSheets (single source of truth). */
+export function getUnitsForCheatSheet(slug: string): Unit[] {
+  return allUnits.filter((unit) => unit.cheatSheets?.includes(slug));
+}
 
 export function unitPath(unit: Unit): string {
   return url(`/curriculum/${unit.track}/${unit.slug}/`);
@@ -284,8 +293,4 @@ export function getAdjacentUnits(unit: Unit): {
     prev: index > 0 ? list[index - 1] : undefined,
     next: index < list.length - 1 ? list[index + 1] : undefined,
   };
-}
-
-export function getCheatSheet(slug: string): CheatSheet | undefined {
-  return cheatSheets.find((s) => s.slug === slug);
 }
