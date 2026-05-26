@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import CheatSheetDownloads from '../../components/CheatSheetDownloads.astro';
 import { allUnits, cheatSheets } from '../../data/curriculum';
 import { url } from '../../lib/paths';
 ---
@@ -10,7 +11,7 @@ import { url } from '../../lib/paths';
   current="downloads"
 >
   <h1>Downloads</h1>
-  <p>All curriculum PDFs and cheat sheets in one place. Files will appear here as units are published.</p>
+  <p>All curriculum PDFs and cheat sheets in one place. Preview materials are available now; others follow as units are published.</p>
 
   <h2>Workshops and activities</h2>
   <ul class="unit-list">
@@ -30,19 +31,25 @@ import { url } from '../../lib/paths';
   </ul>
 
   <h2>Cheat sheets</h2>
-  <ul class="unit-list">
+  <div>
     {
       cheatSheets.map((sheet) => (
-        <li>
-          <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
-            <div>
-              <h3>{sheet.title}</h3>
-              <p>{sheet.description}</p>
-            </div>
-            <span class="badge badge-coming">PDF coming soon</span>
-          </a>
-        </li>
+        <div class="download-row">
+          <div>
+            <h3>
+              <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
+            </h3>
+            <p>{sheet.description}</p>
+          </div>
+          {
+            sheet.ready ? (
+              <CheatSheetDownloads slug={sheet.slug} />
+            ) : (
+              <span class="badge badge-coming">PDF coming soon</span>
+            )
+          }
+        </div>
       ))
     }
-  </ul>
+  </div>
 </PageLayout>

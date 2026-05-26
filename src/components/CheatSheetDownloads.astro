@@ -1,0 +1,15 @@
+---
+import { cheatSheetDownloads } from '../lib/downloads';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const { pdf, odt } = cheatSheetDownloads(slug);
+---
+
+<div class="download-actions">
+  <a class="btn btn-primary" href={pdf} download>Download PDF</a>
+  <a class="btn btn-secondary" href={odt} download>Download ODT</a>
+</div>

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import CheatSheetDownloads from '../../../components/CheatSheetDownloads.astro';
 import { cheatSheets } from '../../../data/curriculum';
 import { url } from '../../../lib/paths';
 ---
@@ -24,19 +25,24 @@ import { url } from '../../../lib/paths';
 
   <div class="cheat-grid" style="margin-top: 1.5rem;">
     {
-      cheatSheets.map((sheet) => (
-        <a class="card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
-          <h3>{sheet.title}</h3>
-          <p>{sheet.description}</p>
-          {
-            sheet.ready ? (
-              <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview</span>
-            ) : (
-              <span class="badge badge-coming" style="margin-top: 0.75rem;">PDF coming soon</span>
-            )
-          }
-        </a>
-      ))
+      cheatSheets.map((sheet) =>
+        sheet.ready ? (
+          <div class="card card-static">
+            <h3>
+              <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
+            </h3>
+            <p>{sheet.description}</p>
+            <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview</span>
+            <CheatSheetDownloads slug={sheet.slug} />
+          </div>
+        ) : (
+          <a class="card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
+            <h3>{sheet.title}</h3>
+            <p>{sheet.description}</p>
+            <span class="badge badge-coming" style="margin-top: 0.75rem;">PDF coming soon</span>
+          </a>
+        ),
+      )
     }
   </div>
 </PageLayout>
