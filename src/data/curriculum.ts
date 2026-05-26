@@ -20,6 +20,7 @@ export interface CheatSheet {
   slug: string;
   title: string;
   description: string;
+  ready?: boolean;
 }
 
 export const site = {
@@ -206,6 +207,12 @@ export const allUnits: Unit[] = [...phoneTrack, ...digitalTrack, ...activities];
 
 export const cheatSheets: CheatSheet[] = [
   {
+    slug: 'radio-etiquette',
+    title: 'Radio Etiquette',
+    description: 'How to effectively talk on the radio.',
+    ready: true,
+  },
+  {
     slug: 'gmrs',
     title: 'GMRS',
     description: 'Quick reference for GMRS operation.',
@@ -229,11 +236,6 @@ export const cheatSheets: CheatSheet[] = [
     slug: 'amateur-digital-operation',
     title: 'Amateur Digital Operation',
     description: 'Digital modes overview for new operators.',
-  },
-  {
-    slug: 'radio-etiquette',
-    title: 'Radio Etiquette',
-    description: 'Structured message handling for emcomm.',
   },
 ];
 

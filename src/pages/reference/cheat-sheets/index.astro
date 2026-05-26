@@ -28,7 +28,13 @@ import { url } from '../../../lib/paths';
         <a class="card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
           <h3>{sheet.title}</h3>
           <p>{sheet.description}</p>
-          <span class="badge badge-coming" style="margin-top: 0.75rem;">PDF coming soon</span>
+          {
+            sheet.ready ? (
+              <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview</span>
+            ) : (
+              <span class="badge badge-coming" style="margin-top: 0.75rem;">PDF coming soon</span>
+            )
+          }
         </a>
       ))
     }
