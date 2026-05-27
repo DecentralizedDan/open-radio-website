@@ -8,6 +8,8 @@ import {
   trackLabel,
   type Unit,
 } from '../data/curriculum';
+import WorkshopMaterialDownloads from './WorkshopMaterialDownloads.astro';
+import { workshopMaterialHasDownloads } from '../lib/downloads';
 import { url } from '../lib/paths';
 
 interface Props {
@@ -103,17 +105,35 @@ const trackHref = url(`/curriculum/${unit.track}/`);
           <div class="material-card">
             <h3>Slides</h3>
             <p>60–90 minute slide deck with speaker notes.</p>
-            <span class="badge badge-coming">PDF coming soon</span>
+            {
+              workshopMaterialHasDownloads(unit.slug, 'slides') ? (
+                <WorkshopMaterialDownloads slug={unit.slug} material="slides" />
+              ) : (
+                <span class="badge badge-coming">PDF coming soon</span>
+              )
+            }
           </div>
           <div class="material-card">
             <h3>Learner handout</h3>
             <p>Take-home reference — complements the slides.</p>
-            <span class="badge badge-coming">PDF coming soon</span>
+            {
+              workshopMaterialHasDownloads(unit.slug, 'handout') ? (
+                <WorkshopMaterialDownloads slug={unit.slug} material="handout" />
+              ) : (
+                <span class="badge badge-coming">PDF coming soon</span>
+              )
+            }
           </div>
           <div class="material-card">
             <h3>Trainer guide</h3>
             <p>For instructors — logistics, equipment, success criteria.</p>
-            <span class="badge badge-coming">PDF coming soon</span>
+            {
+              workshopMaterialHasDownloads(unit.slug, 'trainer-guide') ? (
+                <WorkshopMaterialDownloads slug={unit.slug} material="trainer-guide" />
+              ) : (
+                <span class="badge badge-coming">PDF coming soon</span>
+              )
+            }
           </div>
         </div>
       ) : (
