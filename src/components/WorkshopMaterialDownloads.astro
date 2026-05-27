@@ -1,0 +1,32 @@
+---
+import {
+  workshopMaterialDownloads,
+  type WorkshopMaterial,
+} from '../lib/downloads';
+
+interface Props {
+  slug: string;
+  material: WorkshopMaterial;
+}
+
+const { slug, material } = Astro.props;
+const downloads = workshopMaterialDownloads(slug, material);
+---
+
+{
+  downloads.length > 0 && (
+    <div class="download-actions">
+      {
+        downloads.map(({ href, label, primary }) => (
+          <a
+            class={primary ? 'btn btn-primary' : 'btn btn-secondary'}
+            href={href}
+            download
+          >
+            {label}
+          </a>
+        ))
+      }
+    </div>
+  )
+}
