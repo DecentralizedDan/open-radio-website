@@ -23,6 +23,7 @@ const trackHref = url(`/curriculum/${unit.track}/`);
 ---
 
 <PageLayout title={unit.title} description={unit.description} current="curriculum">
+  <div class="unit-page">
   <Breadcrumbs
     items={[
       { label: 'Home', href: '/' },
@@ -44,17 +45,9 @@ const trackHref = url(`/curriculum/${unit.track}/`);
   </div>
 
   <h1>{unit.title}</h1>
-  <p>{unit.description}</p>
-
-  <nav class="section-nav" aria-label="Page sections">
-    <a href="#overview">Overview</a>
-    <a href="#materials">Materials</a>
-    <a href="#promo">Promo copy</a>
-    <a href="#run">Run this workshop</a>
-  </nav>
-
   <section id="overview" class="unit-section">
     <h2>Overview</h2>
+    <p>{unit.description}</p>
     {
       unit.overview ? (
         <>
@@ -192,40 +185,6 @@ const trackHref = url(`/curriculum/${unit.track}/`);
     }
   </section>
 
-  <section id="run" class="unit-section">
-    <h2>Run this workshop</h2>
-    {
-      unit.runChecklist ? (
-        <>
-          <p><strong>5-minute prep checklist</strong></p>
-          <ul>
-            {unit.runChecklist.prepItems.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-          <p>
-            <strong>Success criteria:</strong> {unit.runChecklist.successCriteria}
-          </p>
-        </>
-      ) : (
-        <p>Prep checklist and success criteria will appear here when this unit is published.</p>
-      )
-    }
-    <RelatedCheatSheets unit={unit} heading="Related cheat sheets" />
-    {
-      unit.cheatSheets && unit.cheatSheets.length > 0 && (
-        <p>Print one per learner before class.</p>
-      )
-    }
-    {
-      unit.cheatSheets && unit.cheatSheets.length > 0 && (
-        <p>
-          <a href={url('/reference/cheat-sheets/')}>All cheat sheets →</a>
-        </p>
-      )
-    }
-  </section>
-
   {
     (prev || next) && (
       <nav class="unit-nav-footer" aria-label="Track navigation">
@@ -242,4 +201,5 @@ const trackHref = url(`/curriculum/${unit.track}/`);
       </nav>
     )
   }
+  </div>
 </PageLayout>
