@@ -4,6 +4,24 @@ export type License = 'none' | 'technician' | 'general';
 export type UnitType = 'workshop' | 'activity';
 export type Track = 'phone' | 'digital' | 'activities';
 
+export interface UnitOverview {
+  learnerOutcomes: string[];
+  groupSize?: string;
+  setting?: string;
+  equipment?: string;
+}
+
+export interface UnitPromo {
+  long: string;
+  medium: string;
+  short: string;
+}
+
+export interface UnitRunChecklist {
+  prepItems: string[];
+  successCriteria: string;
+}
+
 export interface Unit {
   slug: string;
   title: string;
@@ -16,6 +34,9 @@ export interface Unit {
   featuredActivity?: boolean;
   ready?: boolean;
   cheatSheets?: string[];
+  overview?: UnitOverview;
+  promo?: UnitPromo;
+  runChecklist?: UnitRunChecklist;
 }
 
 export interface CheatSheet {
@@ -45,6 +66,37 @@ export const phoneTrack: Unit[] = [
     featured: true,
     ready: true,
     cheatSheets: ['radio-etiquette'],
+    overview: {
+      learnerOutcomes: [
+        'Understand how radio was used after disasters in the US',
+        'Understand fundamentals of what GMRS and Ham radio can and cannot do',
+        'Understand how GMRS and Ham differ, including Ham\'s strengths vs. GMRS',
+      ],
+      groupSize: '5-95',
+      setting: 'Indoor',
+      equipment: 'Projector, sample HT to show learners',
+    },
+    promo: {
+      long: `Radio lets you communicate with your people without depending on cell towers, ISPs, or even running electricity — but only if you know how it works!
+
+Come to this workshop to learn how to make radio part of your emergency preparedness plan. We'll cover three different types of radio technology, specific models that are good for beginners, how you can take advantage of existing radio infrastructure, how (and if!) to get licensed, and much more. We will cover Meshtastic and Meshcore.
+
+No radio knowledge is needed or expected. Total beginners are welcome to this workshop. 90 minutes total, including Q&A at the end.`,
+      medium:
+        "Learn how radio can help you, your family, and your community during a disaster in this fun and engaging workshop! We'll cover three different radio technologies you can use — all in 90 minutes. No prior radio knowledge needed.",
+      short:
+        'The Emergency Radio 101 workshop covers how radio can help you your people in a disaster in 90 minutes. No experience needed. See you there!',
+    },
+    runChecklist: {
+      prepItems: [
+        'Skim trainer guide and slide notes',
+        'Test projector and slides',
+        'Print handouts (one per learner)',
+        'Optional: bring an HT (FRS, GMRS or Ham) for show-and-tell',
+      ],
+      successCriteria:
+        'Learners can explain how they could incorporate radio into their emergency planning.',
+    },
   },
   {
     slug: 'gmrs-101',
