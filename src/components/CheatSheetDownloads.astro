@@ -1,5 +1,5 @@
 ---
-import { cheatSheetDownloads } from '../lib/downloads';
+import { cheatSheetDownloads, odtDownloadTitle } from '../lib/downloads';
 
 interface Props {
   slug: string;
@@ -11,5 +11,5 @@ const { pdf, odt } = cheatSheetDownloads(slug);
 
 <div class="download-actions">
   <a class="btn btn-primary" href={pdf} download>Download PDF</a>
-  <a class="btn btn-secondary" href={odt} download>Download ODT</a>
+  <a class="btn btn-secondary" href={odt} download title={odtDownloadTitle}>Download ODT</a>
 </div>
