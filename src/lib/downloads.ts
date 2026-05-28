@@ -4,6 +4,14 @@ import { url } from './paths';
 
 const websiteRoot = process.cwd();
 
+/** Hover text for Download ODT buttons. */
+export const odtDownloadTitle =
+  'OpenDocument Text — editable in LibreOffice, Google Docs, and Word';
+
+  /** Hover text for Download ODT buttons. */
+export const odpDownloadTitle =
+  'OpenDocument Presentation — editable in LibreOffice, Google Docs, and PowerPoint';
+
 /** Public download paths for a cheat sheet slug (files live under public/downloads/cheat-sheets/). */
 export function cheatSheetDownloads(slug: string) {
   const base = `/downloads/cheat-sheets/${slug}/${slug}`;
@@ -21,29 +29,49 @@ export function cheatSheetHasDownloads(slug: string): boolean {
 
 export type WorkshopMaterial = 'slides' | 'handout' | 'trainer-guide';
 
-function workshopMaterialFileBase(slug: string, material: WorkshopMaterial): string {
-  return path.join(websiteRoot, 'public', 'downloads', 'workshops', slug, material, slug);
+const workshopMaterialConfig = {
+  slides: {
+    folder: 'slides',
+    fileBase: (slug: string) => slug,
+    formats: [
+      { ext: 'pptx', label: 'Download PowerPoint', primary: true },
+      { ext: 'pdf', label: 'Download PDF', primary: false },
+      { ext: 'odp', label: 'Download ODP', primary: false, altExt: 'ods' as const, title: odpDownloadTitle },
+    ],
+  },
+  handout: {
+    folder: 'handouts',
+    fileBase: (slug: string) => `${slug}-handout`,
+    formats: [
+      { ext: 'pdf', label: 'Download PDF', primary: true },
+      { ext: 'odt', label: 'Download ODT', primary: false, title: odtDownloadTitle },
+    ],
+  },
+  'trainer-guide': {
+    folder: 'trainer-guide',
+    fileBase: (slug: string) => `${slug}-trainer-guide`,
+    formats: [
+      { ext: 'pdf', label: 'Download PDF', primary: true },
+      { ext: 'odt', label: 'Download ODT', primary: false, title: odtDownloadTitle },
+    ],
+  },
+} as const;
+
+function workshopMaterialPaths(slug: string, material: WorkshopMaterial) {
+  const config = workshopMaterialConfig[material];
+  const basename = config.fileBase(slug);
+  const dir = path.join(websiteRoot, 'public', 'downloads', 'workshops', slug, config.folder);
+  const urlBase = `/downloads/workshops/${slug}/${config.folder}/${basename}`;
+  return { dir, basename, urlBase, formats: config.formats };
 }
 
-/** Download links for a workshop material (files live under public/downloads/workshops/{slug}/{material}/). */
+/** Download links for a workshop material (files live under public/downloads/workshops/{slug}/). */
 export function workshopMaterialDownloads(
   slug: string,
   material: WorkshopMaterial,
-): Array<{ href: string; label: string; primary: boolean }> {
-  const fileBase = workshopMaterialFileBase(slug, material);
-  const urlBase = `/downloads/workshops/${slug}/${material}/${slug}`;
-
-  const formats =
-    material === 'slides'
-      ? [
-          { ext: 'pptx', label: 'Download PowerPoint', primary: true },
-          { ext: 'pdf', label: 'Download PDF', primary: false },
-          { ext: 'odp', label: 'Download OpenDocument', primary: false, altExt: 'ods' as const },
-        ]
-      : [
-          { ext: 'pdf', label: 'Download PDF', primary: true },
-          { ext: 'odt', label: 'Download ODT', primary: false },
-        ];
+): Array<{ href: string; label: string; primary: boolean; title?: string }> {
+  const { dir, basename, urlBase, formats } = workshopMaterialPaths(slug, material);
+  const fileBase = path.join(dir, basename);
 
   return formats.flatMap((format) => {
     const ext =
@@ -55,7 +83,12 @@ export function workshopMaterialDownloads(
 
     if (!ext) return [];
 
-    return [{ href: url(`${urlBase}.${ext}`), label: format.label, primary: format.primary }];
+    return [{
+      href: url(`${urlBase}.${ext}`),
+      label: format.label,
+      primary: format.primary,
+      ...('title' in format && format.title ? { title: format.title } : {}),
+    }];
   });
 }
 
