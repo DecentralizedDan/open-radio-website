@@ -4,27 +4,28 @@ import { url } from '../lib/paths';
 
 interface Props {
   unit: Unit;
-  heading?: string;
 }
 
-const { unit, heading = 'Related cheat sheets' } = Astro.props;
+const { unit } = Astro.props;
 
 const sheets = (unit.cheatSheets ?? [])
   .map((slug) => getCheatSheet(slug))
   .filter((sheet): sheet is NonNullable<typeof sheet> => sheet !== undefined);
+
+const heading = sheets.length === 1 ? "Cheat sheet" : "Cheat sheets";
+
 ---
 
 {
   sheets.length > 0 && (
-    <>
-      <h3>{heading}</h3>
-      <ul>
-        {sheets.map((sheet) => (
-          <li>
-            <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
-          </li>
-        ))}
-      </ul>
-    </>
+    <p class="related-cheat-sheets">
+      <strong>{heading}:</strong>{' '}
+      {sheets.map((sheet, index) => (
+        <>
+          {index > 0 && ', '}
+          <a href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
+        </>
+      ))}
+    </p>
   )
 }
