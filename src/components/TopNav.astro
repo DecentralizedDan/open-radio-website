@@ -7,7 +7,11 @@ interface Props {
 }
 
 const { current } = Astro.props;
-const path = Astro.url.pathname;
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path =
+  basePath && Astro.url.pathname.startsWith(basePath)
+    ? Astro.url.pathname.slice(basePath.length) || '/'
+    : Astro.url.pathname;
 
 function isActive(key: Props['current']): boolean {
   if (current) return current === key;
