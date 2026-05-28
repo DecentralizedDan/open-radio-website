@@ -17,11 +17,12 @@ const downloads = workshopMaterialDownloads(slug, material);
   downloads.length > 0 && (
     <div class="download-actions">
       {
-        downloads.map(({ href, label, primary }) => (
+        downloads.map(({ href, label, primary, title }) => (
           <a
             class={primary ? 'btn btn-primary' : 'btn btn-secondary'}
             href={href}
             download
+            title={title}
           >
             {label}
           </a>
