@@ -293,7 +293,7 @@ export const cheatSheets: CheatSheet[] = [
 export function licenseLabel(license: License): string {
   switch (license) {
     case 'none':
-      return 'No license needed';
+      return 'No license';
     case 'technician':
       return 'Technician';
     case 'general':
