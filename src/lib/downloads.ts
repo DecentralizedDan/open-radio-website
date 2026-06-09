@@ -96,3 +96,26 @@ export function workshopMaterialDownloads(
 export function workshopMaterialHasDownloads(slug: string, material: WorkshopMaterial): boolean {
   return workshopMaterialDownloads(slug, material).length > 0;
 }
+
+const unitMaterialLabels: { material: WorkshopMaterial; label: string }[] = [
+  { material: 'slides', label: 'Slides' },
+  { material: 'handout', label: 'Handout' },
+  { material: 'trainer-guide', label: 'Trainer guide' },
+];
+
+/** Primary download link per available workshop material (for compact list views). */
+export function unitDownloads(
+  slug: string,
+): Array<{ href: string; label: string; primary: boolean; title?: string }> {
+  return unitMaterialLabels.flatMap(({ material, label }) => {
+    const downloads = workshopMaterialDownloads(slug, material);
+    const primary = downloads.find((download) => download.primary) ?? downloads[0];
+    if (!primary) return [];
+    return [{ ...primary, label }];
+  });
+}
+
+/** True when at least one workshop material file exists for this unit slug. */
+export function unitHasDownloads(slug: string): boolean {
+  return unitDownloads(slug).length > 0;
+}

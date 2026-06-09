@@ -1,0 +1,29 @@
+---
+import { unitDownloads } from '../lib/downloads';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const downloads = unitDownloads(slug);
+---
+
+{
+  downloads.length > 0 && (
+    <div class="download-actions" style="margin-top: 0;">
+      {
+        downloads.map(({ href, label, primary, title }) => (
+          <a
+            class={primary ? 'btn btn-primary' : 'btn btn-secondary'}
+            href={href}
+            download
+            title={title}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </div>
+  )
+}

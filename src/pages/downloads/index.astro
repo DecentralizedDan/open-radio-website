@@ -1,8 +1,9 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import CheatSheetDownloads from '../../components/CheatSheetDownloads.astro';
+import UnitDownloads from '../../components/UnitDownloads.astro';
 import { allUnits, cheatSheets } from '../../data/curriculum';
-import { cheatSheetHasDownloads } from '../../lib/downloads';
+import { cheatSheetHasDownloads, unitHasDownloads } from '../../lib/downloads';
 import { url } from '../../lib/paths';
 ---
 
@@ -15,21 +16,27 @@ import { url } from '../../lib/paths';
   <p>All curriculum PDFs and cheat sheets in one place. Preview materials are available now; others follow as units are published.</p>
 
   <h2>Workshops and activities</h2>
-  <ul class="unit-list">
+  <div>
     {
       allUnits.map((unit) => (
-        <li>
-          <a href={url(`/curriculum/${unit.track}/${unit.slug}/`)}>
-            <div>
-              <h3>{unit.title}</h3>
-              <p>{unit.description}</p>
-            </div>
-            <span class="badge badge-coming">PDFs coming soon</span>
-          </a>
-        </li>
+        <div class="download-row">
+          <div>
+            <h3>
+              <a href={url(`/curriculum/${unit.track}/${unit.slug}/`)}>{unit.title}</a>
+            </h3>
+            <p>{unit.description}</p>
+          </div>
+          {
+            unitHasDownloads(unit.slug) ? (
+              <UnitDownloads slug={unit.slug} />
+            ) : (
+              <span class="badge badge-coming">PDFs coming soon</span>
+            )
+          }
+        </div>
       ))
     }
-  </ul>
+  </div>
 
   <h2>Cheat sheets</h2>
   <div>
