@@ -1,8 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import PathDiagram from '../components/PathDiagram.astro';
+import CheatSheetCard from '../components/CheatSheetCard.astro';
 import UnitCard from '../components/UnitCard.astro';
-import CheatSheetDownloads from '../components/CheatSheetDownloads.astro';
 import {
   site,
   activities,
@@ -10,7 +10,6 @@ import {
   phoneTrack,
   digitalTrack,
 } from '../data/curriculum';
-import { cheatSheetHasDownloads } from '../lib/downloads';
 import { url } from '../lib/paths';
 
 const featuredWorkshops = [...phoneTrack, ...digitalTrack].filter((u) => u.featured);
@@ -22,6 +21,15 @@ const featuredActivitySlugs = [
 const featuredActivities = featuredActivitySlugs.map((slug) =>
   activities.find((u) => u.slug === slug),
 ).filter((u): u is NonNullable<typeof u> => u !== undefined);
+const featuredCheatSheetSlugs = [
+  'radio-etiquette',
+  'uhf-vhf-ham',
+  'amateur-digital-operation',
+  'hf-phone',
+];
+const featuredCheatSheets = featuredCheatSheetSlugs.map((slug) =>
+  cheatSheets.find((s) => s.slug === slug),
+).filter((s): s is NonNullable<typeof s> => s !== undefined);
 ---
 
 <PageLayout title={site.name} description={site.description} current="home">
@@ -75,6 +83,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
   <section class="section">
     <div class="container">
       <h2>Featured workshops</h2>
+      <p>These can be offered in linear courses or as one-off workshops.</p>
       <div class="card-grid card-grid-3" style="margin-top: 1.25rem;">
         {featuredWorkshops.map((unit) => <UnitCard unit={unit} />)}
       </div>
@@ -87,6 +96,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
   <section class="section">
     <div class="container">
       <h2>Featured activities</h2>
+      <p>Standalone fun activities for radio novices and veterans alike.</p>
       <div class="card-grid card-grid-3" style="margin-top: 1.25rem;">
         {featuredActivities.map((unit) => <UnitCard unit={unit} />)}
       </div>
@@ -98,34 +108,10 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
 
   <section class="section">
     <div class="container">
-      <h2>Cheat sheets</h2>
-      <p>Laminate-friendly reference cards — free to print and share.</p>
-      <div class="cheat-grid" style="margin-top: 1.25rem;">
-        {
-          cheatSheets.map((sheet) => {
-            const hasDownloads = cheatSheetHasDownloads(sheet.slug);
-            return hasDownloads || sheet.ready ? (
-              <div class="card card-static">
-                <h3>
-                  <a class="card-title-link" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>{sheet.title}</a>
-                </h3>
-                <p>{sheet.description}</p>
-                {sheet.ready && <span class="badge badge-ready" style="margin-top: 0.75rem;">Preview draft</span>}
-                {hasDownloads ? (
-                  <CheatSheetDownloads slug={sheet.slug} />
-                ) : (
-                  <span class="badge badge-coming" style="margin-top: 0.75rem;">Coming soon</span>
-                )}
-              </div>
-            ) : (
-              <a class="card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
-                <h3>{sheet.title}</h3>
-                <p>{sheet.description}</p>
-                <span class="badge badge-coming" style="margin-top: 0.75rem;">Coming soon</span>
-              </a>
-            );
-          })
-        }
+      <h2>Featured cheat sheets</h2>
+      <p>Quick-reference cards: Made to print, laminate and share.</p>
+      <div class="cheat-sheet-grid" style="margin-top: 1.25rem;">
+        {featuredCheatSheets.map((sheet) => <CheatSheetCard sheet={sheet} />)}
       </div>
       <p style="margin-top: 1.25rem;">
         <a href={url('/reference/cheat-sheets/')}>View all cheat sheets →</a>
