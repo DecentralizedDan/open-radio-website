@@ -15,12 +15,18 @@ pnpm-debug.log*
 # internal documents
 internal_docs/
 
+# personal website planning notes (not for the repo)
+website-plans/
+
 # environment variables
 .env
 .env.production
 
 # macOS-specific files
 .DS_Store
+
+# LibreOffice lock files (created while a document is open)
+.~lock.*#
 
 # jetbrains setting folder
 .idea/
