@@ -1,0 +1,25 @@
+---
+import type { CheatSheet } from '../data/curriculum';
+import { url } from '../lib/paths';
+
+interface Props {
+  sheet: CheatSheet;
+}
+
+const { sheet } = Astro.props;
+---
+
+<a class="cheat-sheet-card" href={url(`/reference/cheat-sheets/${sheet.slug}/`)}>
+  <span class="cheat-sheet-card-label">Reference card</span>
+  <div class="cheat-sheet-card-body">
+    <h3>{sheet.title}</h3>
+    <p>{sheet.description}</p>
+  </div>
+  <div class="cheat-sheet-card-footer">
+    {sheet.ready ? (
+      <span class="badge badge-ready">Preview draft</span>
+    ) : (
+      <span class="badge badge-coming">Coming soon</span>
+    )}
+  </div>
+</a>
