@@ -1,0 +1,163 @@
+---
+const storageKey = 'ardc-draft-notice-dismissed';
+---
+
+<div
+  class="draft-notice"
+  id="draft-notice"
+  hidden
+  aria-hidden="true"
+>
+  <div class="draft-notice__backdrop" data-draft-notice-dismiss tabindex="-1"></div>
+  <div
+    class="draft-notice__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="draft-notice-title"
+    aria-describedby="draft-notice-description"
+  >
+    <button
+      type="button"
+      class="draft-notice__close"
+      aria-label="Close"
+      data-draft-notice-dismiss
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h2 id="draft-notice-title">Notice to all stations</h2>
+    <div id="draft-notice-description">
+      <p>
+        This site is a work in progress, shared for ARDC grant review. The curriculum materials are
+        still in draft form and may change before launch.
+      </p>
+      <p>
+        The full site will launch only after the project is approved and completed. When and if that
+        happens, ARDC will be credited on all pages and documents.
+      </p>
+    </div>
+    <div class="draft-notice__actions">
+      <button type="button" class="btn btn-primary" data-draft-notice-dismiss>
+        Continue to preview
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ storageKey }}>
+  const root = document.getElementById('draft-notice');
+  if (!root) {
+    // Component not on page.
+  } else {
+    const dialog = root.querySelector('.draft-notice__dialog');
+    const dismissTriggers = root.querySelectorAll('[data-draft-notice-dismiss]');
+    const focusableSelector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    let previouslyFocused = null;
+
+    function getFocusableElements() {
+      return Array.from(dialog.querySelectorAll(focusableSelector)).filter(
+        (element) =>
+          !element.hasAttribute('disabled') &&
+          element.getAttribute('aria-hidden') !== 'true' &&
+          element.offsetParent !== null,
+      );
+    }
+
+    function setPageInert(inert) {
+      for (const child of document.body.children) {
+        if (child === root) continue;
+        if (inert) {
+          child.setAttribute('aria-hidden', 'true');
+          child.setAttribute('inert', '');
+        } else {
+          child.removeAttribute('aria-hidden');
+          child.removeAttribute('inert');
+        }
+      }
+    }
+
+    function openModal() {
+      previouslyFocused = document.activeElement;
+      root.hidden = false;
+      root.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('draft-notice-active');
+      setPageInert(true);
+
+      const focusable = getFocusableElements();
+      const continueButton = root.querySelector('.btn.btn-primary');
+      (continueButton ?? focusable[0] ?? dialog).focus();
+    }
+
+    function closeModal() {
+      try {
+        sessionStorage.setItem(storageKey, '1');
+      } catch {
+        // sessionStorage may be unavailable in restricted contexts.
+      }
+
+      root.hidden = true;
+      root.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('draft-notice-active');
+      setPageInert(false);
+
+      if (previouslyFocused instanceof HTMLElement && document.contains(previouslyFocused)) {
+        previouslyFocused.focus();
+      } else {
+        const main = document.getElementById('main-content');
+        if (main) {
+          main.focus();
+        }
+      }
+    }
+
+    function handleKeyDown(event) {
+      if (root.hidden) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeModal();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusable = getFocusableElements();
+      if (focusable.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    function shouldShowModal() {
+      try {
+        return !sessionStorage.getItem(storageKey);
+      } catch {
+        return true;
+      }
+    }
+
+    dismissTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => closeModal());
+    });
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    if (document.documentElement.classList.contains('draft-notice-pending') && shouldShowModal()) {
+      openModal();
+    } else {
+      document.documentElement.classList.remove('draft-notice-pending');
+    }
+  }
+</script>
