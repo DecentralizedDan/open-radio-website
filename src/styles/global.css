@@ -29,6 +29,13 @@
   --color-focus: #ffdd04;
   --color-focus-text: #0b0c0c;
   --tap-target-min: 44px;
+  --header-scroll-offset: 4.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-scroll-offset: 5rem;
+  }
 }
 
 *,
@@ -40,6 +47,7 @@
 html {
   font-size: var(--font-size-base);
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-scroll-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
