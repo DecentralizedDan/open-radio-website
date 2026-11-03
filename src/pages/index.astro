@@ -14,7 +14,7 @@ import { url } from '../lib/paths';
 
 const featuredWorkshops = [...phoneTrack, ...digitalTrack].filter((u) => u.featured);
 const featuredActivitySlugs = [
-  'fox-hunt',
+  'pace-planning',
   'radio-practical-skills',
   'how-to-host-a-neighborhood-net',
 ];
@@ -23,7 +23,7 @@ const featuredActivities = featuredActivitySlugs.map((slug) =>
 ).filter((u): u is NonNullable<typeof u> => u !== undefined);
 const featuredCheatSheetSlugs = [
   'radio-etiquette',
-  'uhf-vhf-ham',
+  'gmrs',
   'amateur-digital-operation',
   'hf-phone',
 ];
@@ -80,7 +80,7 @@ const featuredCheatSheets = featuredCheatSheetSlugs.map((slug) =>
   <section class="section">
     <div class="container">
       <h2>Featured cheat sheets</h2>
-      <p>Quick-reference cards: Made to print, laminate and share.</p>
+      <p>These cheat sheets are made to print, laminate and share.</p>
       <div class="cheat-sheet-grid" style="margin-top: 1.25rem;">
         {featuredCheatSheets.map((sheet) => <CheatSheetCard sheet={sheet} />)}
       </div>
