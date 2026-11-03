@@ -12,19 +12,64 @@ export const odtDownloadTitle =
 export const odpDownloadTitle =
   'OpenDocument Presentation — editable in LibreOffice, Google Docs, and PowerPoint';
 
+function cheatSheetDir(slug: string) {
+  return path.join(websiteRoot, 'public', 'downloads', 'cheat-sheets', slug);
+}
+
+/** Basename for files in public/downloads/cheat-sheets/{slug}/ (e.g. gmrs or gmrs-cheatsheet). */
+function cheatSheetFileBasename(slug: string): string | null {
+  const dir = cheatSheetDir(slug);
+  if (!fs.existsSync(dir)) return null;
+
+  for (const basename of [slug, `${slug}-cheatsheet`]) {
+    const fileBase = path.join(dir, basename);
+    if (fs.existsSync(`${fileBase}.pdf`) || fs.existsSync(`${fileBase}.odt`)) {
+      return basename;
+    }
+  }
+
+  return null;
+}
+
 /** Public download paths for a cheat sheet slug (files live under public/downloads/cheat-sheets/). */
 export function cheatSheetDownloads(slug: string) {
-  const base = `/downloads/cheat-sheets/${slug}/${slug}`;
+  const basename = cheatSheetFileBasename(slug) ?? slug;
+  const base = `/downloads/cheat-sheets/${slug}/${basename}`;
   return {
     pdf: url(`${base}.pdf`),
     odt: url(`${base}.odt`),
   };
 }
 
+/** Download buttons for cheat sheet files that exist on disk. */
+export function cheatSheetDownloadLinks(
+  slug: string,
+): Array<{ href: string; label: string; primary: boolean; title?: string }> {
+  const basename = cheatSheetFileBasename(slug);
+  if (!basename) return [];
+
+  const fileBase = path.join(cheatSheetDir(slug), basename);
+  const urlBase = `/downloads/cheat-sheets/${slug}/${basename}`;
+  const links: Array<{ href: string; label: string; primary: boolean; title?: string }> = [];
+
+  if (fs.existsSync(`${fileBase}.pdf`)) {
+    links.push({ href: url(`${urlBase}.pdf`), label: 'Download PDF', primary: true });
+  }
+  if (fs.existsSync(`${fileBase}.odt`)) {
+    links.push({
+      href: url(`${urlBase}.odt`),
+      label: 'Download ODT',
+      primary: false,
+      title: odtDownloadTitle,
+    });
+  }
+
+  return links;
+}
+
 /** True when at least one PDF or ODT exists for this slug under public/downloads/cheat-sheets/. */
 export function cheatSheetHasDownloads(slug: string): boolean {
-  const fileBase = path.join(websiteRoot, 'public', 'downloads', 'cheat-sheets', slug, slug);
-  return fs.existsSync(`${fileBase}.pdf`) || fs.existsSync(`${fileBase}.odt`);
+  return cheatSheetDownloadLinks(slug).length > 0;
 }
 
 export type WorkshopMaterial = 'slides' | 'handout' | 'trainer-guide';

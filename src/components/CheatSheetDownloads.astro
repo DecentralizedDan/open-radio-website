@@ -1,15 +1,25 @@
 ---
-import { cheatSheetDownloads, odtDownloadTitle } from '../lib/downloads';
+import { cheatSheetDownloadLinks } from '../lib/downloads';
 
 interface Props {
   slug: string;
 }
 
 const { slug } = Astro.props;
-const { pdf, odt } = cheatSheetDownloads(slug);
+const downloads = cheatSheetDownloadLinks(slug);
 ---
 
 <div class="download-actions">
-  <a class="btn btn-primary" href={pdf} download>Download PDF</a>
-  <a class="btn btn-secondary" href={odt} download title={odtDownloadTitle}>Download ODT</a>
+  {
+    downloads.map((download) => (
+      <a
+        class={`btn ${download.primary ? 'btn-primary' : 'btn-secondary'}`}
+        href={download.href}
+        download
+        {...(download.title ? { title: download.title } : {})}
+      >
+        {download.label}
+      </a>
+    ))
+  }
 </div>

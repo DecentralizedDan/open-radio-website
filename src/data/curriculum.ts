@@ -267,6 +267,7 @@ export const cheatSheets: CheatSheet[] = [
     slug: 'gmrs',
     title: 'GMRS',
     description: 'Quick reference for GMRS operation.',
+    ready: true,
   },
   {
     slug: 'uhf-vhf-ham',
