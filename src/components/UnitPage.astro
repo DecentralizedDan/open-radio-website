@@ -164,20 +164,28 @@ const trackHref = url(`/curriculum/${unit.track}/`);
             </div>
             <pre id={`${unit.slug}-promo-long`}>{unit.promo.long}</pre>
           </div>
-          <div class="promo-block">
-            <div class="promo-block-header">
-              <strong>Medium</strong>
-              <CopyButton targetId={`${unit.slug}-promo-medium`} />
-            </div>
-            <pre id={`${unit.slug}-promo-medium`}>{unit.promo.medium}</pre>
-          </div>
-          <div class="promo-block">
-            <div class="promo-block-header">
-              <strong>Short (SMS)</strong>
-              <CopyButton targetId={`${unit.slug}-promo-short`} />
-            </div>
-            <pre id={`${unit.slug}-promo-short`}>{unit.promo.short}</pre>
-          </div>
+          {
+            unit.promo.medium && (
+              <div class="promo-block">
+                <div class="promo-block-header">
+                  <strong>Medium</strong>
+                  <CopyButton targetId={`${unit.slug}-promo-medium`} />
+                </div>
+                <pre id={`${unit.slug}-promo-medium`}>{unit.promo.medium}</pre>
+              </div>
+            )
+          }
+          {
+            unit.promo.short && (
+              <div class="promo-block">
+                <div class="promo-block-header">
+                  <strong>Short (SMS)</strong>
+                  <CopyButton targetId={`${unit.slug}-promo-short`} />
+                </div>
+                <pre id={`${unit.slug}-promo-short`}>{unit.promo.short}</pre>
+              </div>
+            )
+          }
         </>
       ) : (
         <p>Long, medium, and short promo blurbs will appear here when this unit is published.</p>

@@ -13,8 +13,8 @@ export interface UnitOverview {
 
 export interface UnitPromo {
   long: string;
-  medium: string;
-  short: string;
+  medium?: string;
+  short?: string;
 }
 
 export interface UnitRunChecklist {
@@ -240,6 +240,17 @@ export const activities: Unit[] = [
     description:
       'Developing a Primary, Alternate, Contingency, and Emergency communications plan.',
     duration: '60–90 min',
+    ready: true,
+    promo: {
+      long: `PACE --  short for "primary, alternate, contingent, and emergency" -- is a common prepping technique for a tiered comms plan with the folks you'll want to stay in touch with during a disaster. Specifically, it addresses how to gracefully switch comms technologies and techniques when systems fail, and how to coordinate it so that everyone switches to the same technology / technique at the same time!
+
+This is a 60-90 minute workshop and participants will come out of it with a specific, concrete, actionable tiered comms plan for the neighborhood. This is a fun way for folks to discuss how they will prepare for -- and deal with -- future disasters.`,
+      medium: `PACE --  "primary, alternate, contingent, and emergency" -- is a type of comms plan you develop to stay in touch with your people during a disaster. It addresses how to switch communications technologies when systems fail, and how to coordinate it so that everyone switches at the same time!
+
+This is a fun, participatory 60-90 minute workshop. Participants come out of it with a specific, concrete, actionable tiered comms plan for their neighborhood.`,
+      short:
+        'PACE --  "primary, alternate, contingent, and emergency" -- is a tiered comms plan that keeps you in touch with your people during a disaster. This fun 60-90 minute workshop will have participants develop their own PACE comms plan for their neighborhood.',
+    },
   },
   {
     slug: 'fox-hunt',
