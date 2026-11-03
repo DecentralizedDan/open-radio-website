@@ -284,6 +284,7 @@ export const cheatSheets: CheatSheet[] = [
     slug: 'uhf-vhf-ham',
     title: 'UHF/VHF Ham',
     description: 'Getting on the air with a handheld on VHF and UHF.',
+    ready: true,
   },
   {
     slug: 'hf-phone',
