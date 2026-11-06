@@ -7,7 +7,7 @@ export function url(path: string): string {
   const baseSegment = base.slice(1, -1);
   let clean = path.startsWith('/') ? path.slice(1) : path;
 
-  // Avoid /open-radio-website/open-radio-website/... if base is applied twice.
+  // Avoid doubled path segments if base is applied twice (e.g. misconfigured link + prefixed base).
   if (baseSegment && (clean === baseSegment || clean.startsWith(`${baseSegment}/`))) {
     clean = clean === baseSegment ? '' : clean.slice(baseSegment.length + 1);
   }

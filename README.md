@@ -20,16 +20,26 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:4321/open-radio-website/](http://localhost:4321/open-radio-website/) (local preview uses the same base path as GitHub Pages).
+Open [http://localhost:4321/](http://localhost:4321/) (dev server uses the same `base` as production: `/` on teachradio.net).
 
-## Deploy (GitHub Pages)
+## Deploy
 
-Live URL: [https://decentralizeddan.github.io/open-radio-website/](https://decentralizeddan.github.io/open-radio-website/)
+**Production URL:** [https://teachradio.net/](https://teachradio.net/)
 
-1. **One-time:** In the repo, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions** (not “Deploy from a branch”). Save. Without this step, deploy workflows fail with “Get Pages site failed”.
-2. Push to the `master` branch on [DecentralizedDan/open-radio-website](https://github.com/DecentralizedDan/open-radio-website).
+`astro.config.mjs` sets `site: 'https://teachradio.net'` and `base: '/'` so links, assets, and canonical URLs use the apex domain. If you prefer **www**, use `site: 'https://www.teachradio.net'` instead and point DNS accordingly.
 
-`astro.config.mjs` sets `site` and `base` for this project-site URL. After the first successful deploy, Pages may take a minute or two to go live.
+### GitHub Pages
+
+1. **One-time:** In the repo, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions** (not “Deploy from a branch”). Save.
+2. **Custom domain:** **Settings → Pages → Custom domain** → `teachradio.net` (or `www.teachradio.net`). Enable **Enforce HTTPS** after DNS validates. The `public/CNAME` file should match that hostname.
+3. **DNS** (at your registrar or DNS host): for the apex, add GitHub’s **A** records ([GitHub Pages DNS](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)); for **www**, use a **CNAME** to `<user>.github.io` as documented there.
+4. Push to the `master` branch. After the first successful deploy, Pages may take a minute or two to go live.
+
+**Old GitHub Pages URL** (`https://decentralizeddan.github.io/open-radio-website/...`) uses a different path prefix; after switching the custom domain, either remove that project-site host or add redirects so bookmarks still work.
+
+### Other hosts (Cloudflare Pages, Netlify, Vercel, etc.)
+
+Connect the same repo, run `npm run build`, publish the `dist/` folder, attach `teachradio.net`, and set the production URL in `astro.config.mjs` to match (apex vs www).
 
 The workflow in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) runs `npm ci`, `npm run build`, and publishes `dist/`.
 
