@@ -207,6 +207,7 @@ export const activities: Unit[] = [
     description: 'Using best practices to communicate on the air with FRS radios.',
     duration: '60–90 min',
     featuredActivity: true,
+    ready: true,
     cheatSheets: ['radio-etiquette'],
   },
   {
