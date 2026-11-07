@@ -262,6 +262,7 @@ This is a fun, participatory 60-90 minute workshop. Participants come out of it 
       'Find a hidden transmitter — learn about radio waves, antennas, and reception.',
     duration: '60–90 min',
     featuredActivity: true,
+    ready: true,
   },
 ];
 
